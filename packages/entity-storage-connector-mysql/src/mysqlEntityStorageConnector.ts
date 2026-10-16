@@ -2440,7 +2440,10 @@ export class MySqlEntityStorageConnector<T = unknown>
 			}
 			values.push(...inValues.map(val => this.propertyToDbValue(val, type)));
 			const placeholders = inValues.map(() => "?").join(", ");
-			return `${this.qualifiedColumn(prop, tableAlias)} IN (${placeholders})`;
+			const inColumn =
+				this.jsonPathExpression(comparator.property, tableAlias) ??
+				this.qualifiedColumn(prop, tableAlias);
+			return `${inColumn} IN (${placeholders})`;
 		}
 
 		// null/undefined must use IS NULL / IS NOT NULL - never a parameterised placeholder.
@@ -2455,14 +2458,9 @@ export class MySqlEntityStorageConnector<T = unknown>
 				const nullCheck =
 					comparator.comparison === ComparisonOperator.Equals ? "IS NULL" : "IS NOT NULL";
 
-				if (comparator.property.split(".").length > 1) {
-					const rootProp = comparator.property.split(".")[0];
-					const nestedPath = comparator.property.split(".").slice(1).join(".");
-					const rootSchema = this._entitySchema.properties?.find(p => p.property === rootProp);
-					const isArray = rootSchema?.type === EntitySchemaPropertyType.Array;
-					const jsonPath = isArray ? `$[*].${nestedPath}` : `$.${nestedPath}`;
-					const jsonExpr = `JSON_UNQUOTE(JSON_EXTRACT(${this.qualifiedColumn(rootProp, tableAlias)}, '${jsonPath}'))`;
-					return `${jsonExpr} ${nullCheck}`;
+				const nullJsonExpr = this.jsonPathExpression(comparator.property, tableAlias);
+				if (Is.stringValue(nullJsonExpr)) {
+					return `${nullJsonExpr} ${nullCheck}`;
 				}
 				return `${this.qualifiedColumn(prop, tableAlias)} ${nullCheck}`;
 			}
@@ -2471,14 +2469,8 @@ export class MySqlEntityStorageConnector<T = unknown>
 		const dbValue = this.propertyToDbValue(comparator.value, type);
 		values.push(dbValue);
 
-		if (comparator.property.split(".").length > 1) {
-			const rootProp = comparator.property.split(".")[0];
-			const nestedPath = comparator.property.split(".").slice(1).join(".");
-			const rootSchema = this._entitySchema.properties?.find(p => p.property === rootProp);
-			const isArray = rootSchema?.type === EntitySchemaPropertyType.Array;
-			const jsonPath = isArray ? `$[*].${nestedPath}` : `$.${nestedPath}`;
-			const jsonExpr = `JSON_UNQUOTE(JSON_EXTRACT(${this.qualifiedColumn(rootProp, tableAlias)}, '${jsonPath}'))`;
-
+		const jsonExpr = this.jsonPathExpression(comparator.property, tableAlias);
+		if (Is.stringValue(jsonExpr)) {
 			switch (comparator.comparison) {
 				case ComparisonOperator.Includes: {
 					values.pop();
@@ -2560,6 +2552,32 @@ export class MySqlEntityStorageConnector<T = unknown>
 					comparison: comparator.comparison
 				});
 		}
+	}
+
+	/**
+	 * Build the expression which reads the nested value of a dot-notation property
+	 * from its JSON column, or undefined when the property is a plain column.
+	 * Every path segment is double-quoted, which MySQL requires for keys which are
+	 * not ECMAScript identifiers, such as the JSON-LD "@type", "@id" and "@value"
+	 * keys, and accepts for every other key. The segments are safe to embed in the
+	 * SQL literal because EntityStorageHelper.validateConditionProperties has
+	 * already rejected quotes, backslashes, SQL comment markers and control characters.
+	 * @param property The dot-notation property of the condition.
+	 * @param tableAlias The optional table alias to qualify the column with.
+	 * @returns The JSON extraction expression, or undefined for a plain column.
+	 * @internal
+	 */
+	private jsonPathExpression(property: string, tableAlias?: string): string | undefined {
+		const parts = property.split(".");
+		if (parts.length <= 1) {
+			return undefined;
+		}
+		const rootProp = parts[0];
+		const rootSchema = this._entitySchema.properties?.find(p => p.property === rootProp);
+		const isArray = rootSchema?.type === EntitySchemaPropertyType.Array;
+		const segments = parts.slice(1).map(segment => `"${segment}"`);
+		const jsonPath = `${isArray ? "$[*]" : "$"}.${segments.join(".")}`;
+		return `JSON_UNQUOTE(JSON_EXTRACT(${this.qualifiedColumn(rootProp, tableAlias)}, '${jsonPath}'))`;
 	}
 
 	/**

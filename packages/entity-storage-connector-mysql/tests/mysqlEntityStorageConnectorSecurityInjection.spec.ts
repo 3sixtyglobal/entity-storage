@@ -18,6 +18,9 @@ class TestType {
 
 	@property({ type: "string" })
 	public value1!: string;
+
+	@property({ type: "object", optional: true })
+	public details?: { [key: string]: unknown };
 }
 
 describe("MySqlEntityStorageConnector - SQL injection guard", () => {
@@ -65,6 +68,19 @@ describe("MySqlEntityStorageConnector - SQL injection guard", () => {
 		await expect(
 			connector.query({
 				property: "value1.subField",
+				comparison: ComparisonOperator.Equals,
+				value: "x"
+			})
+		).rejects.toMatchObject({
+			name: "GeneralError",
+			message: "entityStorageHelper.invalidConditionPropertyPath"
+		});
+	});
+
+	test("query() rejects a dot-notation segment wrapped in quotes, the key is written bare", async () => {
+		await expect(
+			connector.query({
+				property: 'details."@type"',
 				comparison: ComparisonOperator.Equals,
 				value: "x"
 			})

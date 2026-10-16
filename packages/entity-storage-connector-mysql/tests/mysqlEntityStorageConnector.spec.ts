@@ -151,7 +151,11 @@ class AnnotationTestType {
 	public id!: string;
 
 	@property({ type: "object", optional: true })
-	public annotationObject?: { globalId: string };
+	public annotationObject?: {
+		globalId: string;
+		"@type"?: string;
+		identifier?: { value?: string; "@value"?: string };
+	};
 
 	@property({ type: "string", optional: true })
 	public label?: string;
@@ -2771,6 +2775,201 @@ describe("MySqlEntityStorageConnector", () => {
 		await connector?.teardown?.();
 		await connector?.bootstrap?.();
 		expect(await connector.count()).toEqual(0);
+	});
+
+	describe("dot-notation path segments which are not identifiers", () => {
+		test.skipIf(!SUPPORT_DOT_NOTATION)("can query with Equals on a JSON-LD @type key", async () => {
+			const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+			await connector.set({
+				id: "1",
+				annotationObject: { globalId: "gid-a", "@type": "LogisticsLocation" }
+			});
+			await connector.set({
+				id: "2",
+				annotationObject: { globalId: "gid-b", "@type": "Consignment" }
+			});
+			await connector.set({ id: "3", annotationObject: { globalId: "gid-c" } });
+
+			const result = await connector.query({
+				property: "annotationObject.@type",
+				comparison: ComparisonOperator.Equals,
+				value: "LogisticsLocation"
+			});
+
+			expect(result.entities.map(e => (e as AnnotationTestType).id)).toEqual(["1"]);
+		});
+
+		test.skipIf(!SUPPORT_DOT_NOTATION || !SUPPORT_NOT_EQUALS)(
+			"can query with NotEquals on a JSON-LD @type key",
+			async () => {
+				const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+				await connector.set({
+					id: "1",
+					annotationObject: { globalId: "gid-a", "@type": "LogisticsLocation" }
+				});
+				await connector.set({
+					id: "2",
+					annotationObject: { globalId: "gid-b", "@type": "Consignment" }
+				});
+
+				const result = await connector.query({
+					property: "annotationObject.@type",
+					comparison: ComparisonOperator.NotEquals,
+					value: "LogisticsLocation"
+				});
+
+				expect(result.entities.map(e => (e as AnnotationTestType).id)).toEqual(["2"]);
+			}
+		);
+
+		test.skipIf(!SUPPORT_DOT_NOTATION)(
+			"can query with Includes on a JSON-LD @type key",
+			async () => {
+				const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+				await connector.set({
+					id: "1",
+					annotationObject: { globalId: "gid-a", "@type": "LogisticsLocation" }
+				});
+				await connector.set({
+					id: "2",
+					annotationObject: { globalId: "gid-b", "@type": "Consignment" }
+				});
+
+				const result = await connector.query({
+					property: "annotationObject.@type",
+					comparison: ComparisonOperator.Includes,
+					value: "Location"
+				});
+
+				expect(result.entities.map(e => (e as AnnotationTestType).id)).toEqual(["1"]);
+			}
+		);
+
+		test.skipIf(!SUPPORT_DOT_NOTATION)("can query with In on a JSON-LD @type key", async () => {
+			const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+			await connector.set({
+				id: "1",
+				annotationObject: { globalId: "gid-a", "@type": "LogisticsLocation" }
+			});
+			await connector.set({
+				id: "2",
+				annotationObject: { globalId: "gid-b", "@type": "Consignment" }
+			});
+			await connector.set({
+				id: "3",
+				annotationObject: { globalId: "gid-c", "@type": "TransportMovement" }
+			});
+
+			const result = await connector.query({
+				property: "annotationObject.@type",
+				comparison: ComparisonOperator.In,
+				value: ["LogisticsLocation", "Consignment"]
+			});
+
+			expect(result.entities.map(e => (e as AnnotationTestType).id).sort()).toEqual(["1", "2"]);
+		});
+
+		test.skipIf(!SUPPORT_DOT_NOTATION || !SUPPORT_NULL_UNDEFINED_COMPARISON)(
+			"can query with Equals null on a JSON-LD @type key",
+			async () => {
+				const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+				await connector.set({
+					id: "1",
+					annotationObject: { globalId: "gid-a", "@type": "LogisticsLocation" }
+				});
+				await connector.set({ id: "2", annotationObject: { globalId: "gid-b" } });
+
+				const result = await connector.query({
+					property: "annotationObject.@type",
+					comparison: ComparisonOperator.Equals,
+					value: null
+				});
+
+				expect(result.entities.map(e => (e as AnnotationTestType).id)).toEqual(["2"]);
+			}
+		);
+
+		test.skipIf(!SUPPORT_DOT_NOTATION)(
+			"can query with Equals on a JSON-LD @value key two levels down",
+			async () => {
+				const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+				await connector.set({
+					id: "1",
+					annotationObject: { globalId: "gid-a", identifier: { "@value": "LOC-001" } }
+				});
+				await connector.set({
+					id: "2",
+					annotationObject: { globalId: "gid-b", identifier: { "@value": "LOC-002" } }
+				});
+
+				const result = await connector.query({
+					property: "annotationObject.identifier.@value",
+					comparison: ComparisonOperator.Equals,
+					value: "LOC-001"
+				});
+
+				expect(result.entities.map(e => (e as AnnotationTestType).id)).toEqual(["1"]);
+			}
+		);
+
+		test.skipIf(!SUPPORT_DOT_NOTATION || !SUPPORT_OR_CONDITIONS)(
+			"can query with nested and/or groups mixing a JSON-LD @type key and identifier keys",
+			async () => {
+				const connector = await createConnector<AnnotationTestType>(nameof<AnnotationTestType>());
+				await connector.set({
+					id: "1",
+					annotationObject: {
+						globalId: "gid-a",
+						"@type": "LogisticsLocation",
+						identifier: { value: "LOC-001" }
+					}
+				});
+				await connector.set({
+					id: "2",
+					annotationObject: {
+						globalId: "gid-b",
+						"@type": "LogisticsLocation",
+						identifier: { "@value": "LOC-002" }
+					}
+				});
+				await connector.set({
+					id: "3",
+					annotationObject: {
+						globalId: "gid-c",
+						"@type": "Consignment",
+						identifier: { value: "LOC-001" }
+					}
+				});
+
+				const result = await connector.query({
+					logicalOperator: LogicalOperator.And,
+					conditions: [
+						{
+							property: "annotationObject.@type",
+							comparison: ComparisonOperator.Equals,
+							value: "LogisticsLocation"
+						},
+						{
+							logicalOperator: LogicalOperator.Or,
+							conditions: [
+								{
+									property: "annotationObject.identifier.value",
+									comparison: ComparisonOperator.Equals,
+									value: "LOC-001"
+								},
+								{
+									property: "annotationObject.identifier.@value",
+									comparison: ComparisonOperator.Equals,
+									value: "LOC-002"
+								}
+							]
+						}
+					]
+				});
+
+				expect(result.entities.map(e => (e as AnnotationTestType).id).sort()).toEqual(["1", "2"]);
+			}
+		);
 	});
 
 	describe("dynamically-built OR conditions on dot-notation path", () => {
