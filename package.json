@@ -1,5 +1,5 @@
 {
-	"name": "@3sixty/entity-storage",
+	"name": "3sixty-entity-storage",
 	"version": "0.0.0",
 	"description": "Unified packages for modelling, serving and connecting entity storage across multiple backends.",
 	"repository": {
