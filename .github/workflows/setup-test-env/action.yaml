@@ -25,7 +25,9 @@ runs:
       if: inputs.package == 'packages/entity-storage-connector-scylladb' || inputs.package == 'all'
       shell: bash
       run: |
-        docker pull scylladb/scylla:latest && docker run -d --name 3sixty-entity-storage-scylladb -p 9042:9042 scylladb/scylla:latest
+        # ScyllaDB reserves kernel AIO slots per shard, raise the limit so services such as MySQL can still start
+        sudo sysctl -w fs.aio-max-nr=1048576
+        docker pull scylladb/scylla:latest && docker run -d --name 3sixty-entity-storage-scylladb -p 9042:9042 scylladb/scylla:latest --smp 1 --memory 1G --overprovisioned 1 --developer-mode 1
         echo "Waiting for ScyllaDB to be ready (may take up to 2 minutes)..."
         timeout 120 bash -c 'until docker exec 3sixty-entity-storage-scylladb cqlsh -e "SELECT now() FROM system.local" > /dev/null 2>&1; do sleep 5; done'
 

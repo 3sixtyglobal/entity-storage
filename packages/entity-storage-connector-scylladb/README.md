@@ -13,7 +13,7 @@ npm install @3sixty/entity-storage-connector-scylladb
 To perform testing of this component it may be necessary to launch a local instance to communicate with.
 
 ```shell
-docker run -d --name 3sixty-entity-storage-scylladb -p 9042:9042 scylladb/scylla:latest
+docker run -d --name 3sixty-entity-storage-scylladb -p 9042:9042 scylladb/scylla:latest --smp 1 --memory 1G --overprovisioned 1 --developer-mode 1
 ```
 
 ## Examples
