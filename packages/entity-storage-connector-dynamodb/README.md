@@ -13,7 +13,7 @@ npm install @3sixty/entity-storage-connector-dynamodb
 To perform testing of this component it may be necessary to launch a local instance to communicate with.
 
 ```shell
-docker run -d --name 3sixty-entity-storage-dynamodb -p 18000:8000 amazon/dynamodb-local
+docker run -d --name 3sixty-entity-storage-dynamodb -p 8000:8000 amazon/dynamodb-local
 ```
 
 ## Examples

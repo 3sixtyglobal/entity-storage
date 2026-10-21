@@ -33,5 +33,5 @@ export const TEST_DYNAMODB_CONFIG: IDynamoDbEntityStorageConnectorConfig = {
 	tableName: process.env.TEST_DYNAMODB_TABLE_NAME,
 	endpoint: process.env.TEST_DYNAMODB_ENDPOINT,
 	connectionTimeoutMs: 10000,
-	maxAttempts: 1
+	maxAttempts: 3
 };

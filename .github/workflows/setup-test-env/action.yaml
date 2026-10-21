@@ -25,7 +25,7 @@ runs:
       if: inputs.package == 'packages/entity-storage-connector-scylladb' || inputs.package == 'all'
       shell: bash
       run: |
-        docker run -d --name 3sixty-entity-storage-scylladb -p 9042:9042 scylladb/scylla:5.4.9
+        docker pull scylladb/scylla:latest && docker run -d --name 3sixty-entity-storage-scylladb -p 9042:9042 scylladb/scylla:latest
         echo "Waiting for ScyllaDB to be ready (may take up to 2 minutes)..."
         timeout 120 bash -c 'until docker exec 3sixty-entity-storage-scylladb cqlsh -e "SELECT now() FROM system.local" > /dev/null 2>&1; do sleep 5; done'
 
@@ -54,10 +54,10 @@ runs:
     - name: Start Firestore Emulator
       if: inputs.package == 'packages/entity-storage-connector-gcp-firestore' || inputs.package == 'all'
       shell: bash
-      run: docker run -d --name 3sixty-entity-storage-firestore -p 8080:8080 gcr.io/google.com/cloudsdktool/cloud-sdk:emulators gcloud beta emulators firestore start --host-port=0.0.0.0:8080
+      run: docker pull gcr.io/google.com/cloudsdktool/cloud-sdk:emulators && docker run -d --name 3sixty-entity-storage-firestore -p 8080:8080 gcr.io/google.com/cloudsdktool/cloud-sdk:emulators gcloud beta emulators firestore start --host-port=0.0.0.0:8080
 
     # Start CosmosDB service only for CosmosDB package
     - name: Run CosmosDB Emulator
       if: inputs.package == 'packages/entity-storage-connector-cosmosdb' || inputs.package == 'all'
       shell: bash
-      run: docker run -p 8081:8081 --name 3sixty-entity-storage-cosmos --detach mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview
+      run: docker pull mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview && docker run -p 8081:8081 --name 3sixty-entity-storage-cosmos --detach mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:vnext-preview

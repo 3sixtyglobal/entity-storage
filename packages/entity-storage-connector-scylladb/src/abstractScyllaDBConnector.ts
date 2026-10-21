@@ -39,6 +39,7 @@ import { nameof } from "@3sixty/nameof";
 import { types as CassandraTypes, Client } from "cassandra-driver";
 import type { IScyllaDBConfig } from "./models/IScyllaDBConfig.js";
 import type { IScyllaDBTableConfig } from "./models/IScyllaDBTableConfig.js";
+import { ScyllaDBReplicationStrategy } from "./models/scyllaDBReplicationStrategy.js";
 
 /**
  * Store entities using ScyllaDB.
@@ -670,9 +671,13 @@ export abstract class AbstractScyllaDBConnector<T> {
 		connection: Client,
 		keyspaceName: string
 	): Promise<CassandraTypes.ResultSet> {
+		const replication =
+			this._config.replicationStrategy === ScyllaDBReplicationStrategy.SimpleStrategy
+				? "'class' : 'SimpleStrategy', 'replication_factor' : 1"
+				: `'class' : 'NetworkTopologyStrategy', '${this._config.localDataCenter}' : 1`;
 		return this.execute(
 			connection,
-			`CREATE KEYSPACE IF NOT EXISTS "${keyspaceName}" WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1}`
+			`CREATE KEYSPACE IF NOT EXISTS "${keyspaceName}" WITH REPLICATION = { ${replication} }`
 		);
 	}
 

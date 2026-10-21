@@ -1,5 +1,6 @@
 // Copyright 2024 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
+import type { ScyllaDBReplicationStrategy } from "./scyllaDBReplicationStrategy.js";
 
 /**
  * ScyllaDB Configuration.
@@ -19,6 +20,12 @@ export interface IScyllaDBConfig {
 	 * The keyspace to use.
 	 */
 	keyspace: string;
+
+	/**
+	 * The replication strategy used when creating the keyspace.
+	 * @default NetworkTopologyStrategy
+	 */
+	replicationStrategy?: ScyllaDBReplicationStrategy;
 
 	/**
 	 * The port to connect to.

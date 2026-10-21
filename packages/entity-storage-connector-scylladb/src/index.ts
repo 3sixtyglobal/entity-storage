@@ -5,5 +5,6 @@ export * from "./models/IScyllaDBTableConfig.js";
 export * from "./models/IScyllaDBTableConnectorConstructorOptions.js";
 export * from "./models/IScyllaDBViewConfig.js";
 export * from "./models/IScyllaDBViewConnectorConstructorOptions.js";
+export * from "./models/scyllaDBReplicationStrategy.js";
 export * from "./scyllaDBTableConnector.js";
 export * from "./scyllaDBViewConnector.js";

@@ -619,20 +619,30 @@ describe("CosmosDbEntityStorageConnector", () => {
 				entitySchema: nameof<CompositeIndexedTestType>(),
 				config: { ...TEST_COSMOS_CONFIG, containerId }
 			});
-			const replaceSpy = vi.spyOn(Container.prototype, "replace");
+			const readSpy = vi.spyOn(Container.prototype, "read");
 
 			try {
 				expect(await connector.bootstrap()).toBe(true);
 				expect(await connector.bootstrap()).toBe(true);
 
-				// The second bootstrap sees an existing container, so it reconciles the policy rather
-				// than creating one; whatever it sends must still list each group exactly once.
-				expect(replaceSpy).toHaveBeenCalledTimes(1);
-				const replacedDefinition = replaceSpy.mock.calls[0][0] as ContainerDefinition;
-				expect(countCompositeIndex(replacedDefinition, ["/category ASC", "/status DESC"])).toBe(1);
-				expect(countCompositeIndex(replacedDefinition, ["/value DESC", "/status ASC"])).toBe(1);
+				// The second bootstrap reconciles the existing container's policy, so the stored
+				// definition must still list each group exactly once.
+				const container = readSpy.mock.contexts.at(-1) as Container;
+				const { resource: storedDefinition } = await container.read();
+				expect(
+					countCompositeIndex(storedDefinition as ContainerDefinition, [
+						"/category ASC",
+						"/status DESC"
+					])
+				).toBe(1);
+				expect(
+					countCompositeIndex(storedDefinition as ContainerDefinition, [
+						"/value DESC",
+						"/status ASC"
+					])
+				).toBe(1);
 			} finally {
-				replaceSpy.mockRestore();
+				readSpy.mockRestore();
 				try {
 					await connector.teardown?.();
 				} catch {}
