@@ -559,7 +559,8 @@ describe("CosmosDbEntityStorageConnector", () => {
 				// The rest of the container definition has to survive the update.
 				expect(replacedDefinition.id).toBe(containerId);
 				expect(replacedDefinition.indexingPolicy?.indexingMode).toBe("consistent");
-				expect(replacedDefinition.indexingPolicy?.includedPaths).toEqual([{ path: "/*" }]);
+				// Newer emulator images also report a system "_ts" path, so only check ours is kept.
+				expect(replacedDefinition.indexingPolicy?.includedPaths).toContainEqual({ path: "/*" });
 
 				// The container has to remain usable for the sort the index was provisioned for.
 				await indexed.set({ id: "1", category: "catA", value: 1 });
