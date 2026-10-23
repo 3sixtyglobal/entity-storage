@@ -8,7 +8,7 @@ Interface describing an entity storage component.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
@@ -184,7 +184,7 @@ The direction for the order, defaults to ascending.
 
 ##### properties?
 
-keyof `T`[]
+(keyof `T`)[]
 
 The optional properties to return, defaults to all.
 

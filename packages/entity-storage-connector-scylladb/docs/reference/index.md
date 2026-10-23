@@ -12,3 +12,11 @@
 - [IScyllaDBTableConnectorConstructorOptions](interfaces/IScyllaDBTableConnectorConstructorOptions.md)
 - [IScyllaDBViewConfig](interfaces/IScyllaDBViewConfig.md)
 - [IScyllaDBViewConnectorConstructorOptions](interfaces/IScyllaDBViewConnectorConstructorOptions.md)
+
+## Type Aliases
+
+- [ScyllaDBReplicationStrategy](type-aliases/ScyllaDBReplicationStrategy.md)
+
+## Variables
+
+- [ScyllaDBReplicationStrategy](variables/ScyllaDBReplicationStrategy.md)

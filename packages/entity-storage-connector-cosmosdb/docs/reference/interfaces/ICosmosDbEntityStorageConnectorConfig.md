@@ -55,6 +55,14 @@ instead of the mapped host port.
 
 ***
 
+### requestTimeoutMs? {#requesttimeoutms}
+
+> `optional` **requestTimeoutMs?**: `number`
+
+Milliseconds to wait for a Cosmos DB request before timing out, defaults to the SDK value.
+
+***
+
 ### mutexTimeoutMs? {#mutextimeoutms}
 
 > `optional` **mutexTimeoutMs?**: `number`

@@ -25,7 +25,7 @@ Runtime name for the class.
 
 ### queryJoin() {#queryjoin}
 
-> `static` **queryJoin**\<`T`, `U`\>(`connector`, `joinConnector`, `joinOptions`): `Promise`\<\{ `entities`: `Partial`\<`T`\> & `object`[]; `cursor?`: `string`; \}\>
+> `static` **queryJoin**\<`T`, `U`\>(`connector`, `joinConnector`, `joinOptions`): `Promise`\<\{ `entities`: (`Partial`\<`T`\> & `object`)[]; `cursor?`: `string`; \}\>
 
 Perform a join for a connector whose own query language cannot express one. Only the page of
 primary entities is read, using the storage's own paging, and the entities attached to that
@@ -34,11 +34,11 @@ the size of the storage.
 
 #### Type Parameters
 
-##### T
+##### T {#t}
 
 `T`
 
-##### U
+##### U {#u}
 
 `U`
 
@@ -64,6 +64,6 @@ The join configuration.
 
 #### Returns
 
-`Promise`\<\{ `entities`: `Partial`\<`T`\> & `object`[]; `cursor?`: `string`; \}\>
+`Promise`\<\{ `entities`: (`Partial`\<`T`\> & `object`)[]; `cursor?`: `string`; \}\>
 
 The entities with their joined entities, and the next page cursor.

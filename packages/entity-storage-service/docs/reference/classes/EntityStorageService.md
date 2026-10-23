@@ -4,7 +4,7 @@ Class for performing entity service operations.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `any`
 
@@ -286,7 +286,7 @@ The direction for the order, defaults to ascending.
 
 ##### properties?
 
-keyof `T`[]
+(keyof `T`)[]
 
 The optional properties to return, defaults to all.
 

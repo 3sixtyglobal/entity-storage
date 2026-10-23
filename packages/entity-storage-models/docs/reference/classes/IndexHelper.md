@@ -72,7 +72,7 @@ a composite index name can never collide with a single-column index name.
 
 #### Type Parameters
 
-##### T
+##### T {#t}
 
 `T`
 

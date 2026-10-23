@@ -7,14 +7,14 @@ keeping factory knowledge out of the helper itself.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
 The entity type. Defaults to `unknown`. Use a concrete entity type
 when the step's source and target schemas are known at the call site.
 
-### U
+### U {#u}
 
 `U` = `unknown`
 

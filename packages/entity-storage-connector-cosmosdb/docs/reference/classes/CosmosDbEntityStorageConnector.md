@@ -4,7 +4,7 @@ Class for performing entity storage operations using Cosmos DB.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
@@ -369,7 +369,7 @@ The optional sort order.
 
 ##### properties?
 
-keyof `T`[]
+(keyof `T`)[]
 
 The optional properties to return, defaults to all.
 
@@ -400,7 +400,7 @@ and a cursor which can be used to request more entities.
 
 ### queryJoin() {#queryjoin}
 
-> **queryJoin**\<`U`\>(`joinConnector`, `joinOptions`): `Promise`\<\{ `entities`: `Partial`\<`T`\> & `object`[]; `cursor?`: `string`; \}\>
+> **queryJoin**\<`U`\>(`joinConnector`, `joinOptions`): `Promise`\<\{ `entities`: (`Partial`\<`T`\> & `object`)[]; `cursor?`: `string`; \}\>
 
 Find all the entities which match the conditions, attaching to each one the entities from a
 second storage connector whose join property matches. The join behaves like a left join by
@@ -409,7 +409,7 @@ joinRequired asks for an inner join and those entities are left out altogether.
 
 #### Type Parameters
 
-##### U
+##### U {#u}
 
 `U`
 
@@ -431,7 +431,7 @@ conditions, sort order and projection for the joined entities.
 
 #### Returns
 
-`Promise`\<\{ `entities`: `Partial`\<`T`\> & `object`[]; `cursor?`: `string`; \}\>
+`Promise`\<\{ `entities`: (`Partial`\<`T`\> & `object`)[]; `cursor?`: `string`; \}\>
 
 All the entities for the storage matching the conditions with their joined entities,
 and a cursor which can be used to request more entities.
@@ -520,7 +520,7 @@ Create the target connector for performing the migration using a temporary conta
 
 #### Type Parameters
 
-##### U
+##### U {#u-1}
 
 `U`
 
@@ -552,7 +552,7 @@ Finalize the migration by tearing down the old container and replacing it with t
 
 #### Type Parameters
 
-##### U
+##### U {#u-2}
 
 `U`
 
@@ -596,7 +596,7 @@ Cleanup the migration if a migration fails or needs to be aborted.
 
 #### Type Parameters
 
-##### U
+##### U {#u-3}
 
 `U`
 
