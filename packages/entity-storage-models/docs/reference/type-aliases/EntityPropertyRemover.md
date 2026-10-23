@@ -8,7 +8,7 @@ observe which properties were removed and act on their values before they are lo
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 

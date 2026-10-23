@@ -6,11 +6,11 @@ value.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
-### U
+### U {#u}
 
 `U` = `unknown`
 

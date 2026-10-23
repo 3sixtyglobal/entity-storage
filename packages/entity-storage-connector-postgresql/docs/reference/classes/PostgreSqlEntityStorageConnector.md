@@ -4,7 +4,7 @@ Class for performing entity storage operations using ql.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
@@ -413,7 +413,7 @@ Create a new target connector for the migration.
 
 #### Type Parameters
 
-##### U
+##### U {#u}
 
 `U`
 
@@ -445,7 +445,7 @@ Finalize the migration by dropping the source table and renaming the migration t
 
 #### Type Parameters
 
-##### U
+##### U {#u-1}
 
 `U`
 
@@ -489,7 +489,7 @@ Clean up the migration by tearing down the migration table.
 
 #### Type Parameters
 
-##### U
+##### U {#u-2}
 
 `U`
 
@@ -545,7 +545,7 @@ The optional sort order.
 
 ##### properties?
 
-keyof `T`[]
+(keyof `T`)[]
 
 The optional properties to return, defaults to all.
 
@@ -576,7 +576,7 @@ and a cursor which can be used to request more entities.
 
 ### queryJoin() {#queryjoin}
 
-> **queryJoin**\<`U`\>(`joinConnector`, `joinOptions`): `Promise`\<\{ `entities`: `Partial`\<`T`\> & `object`[]; `cursor?`: `string`; \}\>
+> **queryJoin**\<`U`\>(`joinConnector`, `joinOptions`): `Promise`\<\{ `entities`: (`Partial`\<`T`\> & `object`)[]; `cursor?`: `string`; \}\>
 
 Find all the entities which match the conditions, attaching to each one the entities from a
 second storage connector whose join property matches. The join behaves like a left join by
@@ -587,7 +587,7 @@ single statement.
 
 #### Type Parameters
 
-##### U
+##### U {#u-3}
 
 `U`
 
@@ -609,7 +609,7 @@ conditions, sort order and projection for the joined entities.
 
 #### Returns
 
-`Promise`\<\{ `entities`: `Partial`\<`T`\> & `object`[]; `cursor?`: `string`; \}\>
+`Promise`\<\{ `entities`: (`Partial`\<`T`\> & `object`)[]; `cursor?`: `string`; \}\>
 
 All the entities for the storage matching the conditions with their joined entities,
 and a cursor which can be used to request more entities.

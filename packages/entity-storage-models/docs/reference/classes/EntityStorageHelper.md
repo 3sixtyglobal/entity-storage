@@ -64,7 +64,7 @@ Prepare the entity by handling undefined and null values and validating it again
 
 #### Type Parameters
 
-##### T
+##### T {#t}
 
 `T`
 
@@ -115,7 +115,7 @@ Un-prepare the entity by removing null values.
 
 #### Type Parameters
 
-##### T
+##### T {#t-1}
 
 `T`
 
@@ -150,7 +150,7 @@ or has a default sortDirection), throwing sortNotIndexed for the first violation
 
 #### Type Parameters
 
-##### T
+##### T {#t-2}
 
 `T`
 
@@ -187,7 +187,7 @@ for the first property that is not found.
 
 #### Type Parameters
 
-##### T
+##### T {#t-3}
 
 `T`
 
@@ -201,7 +201,7 @@ The entity schema to validate against.
 
 ##### properties?
 
-keyof `T`[]
+(keyof `T`)[]
 
 The properties to check.
 
@@ -224,7 +224,7 @@ The root part of a dot-notation path must exist in the schema and be of type obj
 
 #### Type Parameters
 
-##### T
+##### T {#t-4}
 
 `T`
 
@@ -264,7 +264,7 @@ Validate that every property in a conditions array is a recognised schema proper
 
 #### Type Parameters
 
-##### T
+##### T {#t-5}
 
 `T`
 
@@ -300,11 +300,11 @@ Validate the options for a join query against the schemas of both sides of the j
 
 #### Type Parameters
 
-##### T
+##### T {#t-6}
 
 `T`
 
-##### U
+##### U {#u}
 
 `U`
 
@@ -358,11 +358,11 @@ which moves the position a cursor refers to changes it.
 
 #### Type Parameters
 
-##### T
+##### T {#t-7}
 
 `T`
 
-##### U
+##### U {#u-1}
 
 `U`
 
@@ -392,11 +392,11 @@ so it can be rejected rather than silently restarting somewhere else.
 
 #### Type Parameters
 
-##### T
+##### T {#t-8}
 
 `T`
 
-##### U
+##### U {#u-2}
 
 `U`
 
@@ -431,15 +431,15 @@ Decode a cursor produced by encodeCursor.
 
 #### Type Parameters
 
-##### T
+##### T {#t-9}
 
 `T`
 
-##### U
+##### U {#u-3}
 
 `U`
 
-##### P
+##### P {#p}
 
 `P` = `unknown`
 
@@ -479,7 +479,7 @@ so in-memory evaluation matches stored-absent semantics (optional absent props a
 
 #### Type Parameters
 
-##### T
+##### T {#t-10}
 
 `T`
 

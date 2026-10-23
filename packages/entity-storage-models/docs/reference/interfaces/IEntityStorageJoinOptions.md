@@ -6,11 +6,11 @@ query, the ones with a join prefix apply to the entities being joined to.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
-### U
+### U {#u}
 
 `U` = `unknown`
 
@@ -74,7 +74,7 @@ key ascending, so that paging with a cursor reads a stable order.
 
 ### properties? {#properties}
 
-> `optional` **properties?**: keyof `T`[]
+> `optional` **properties?**: (keyof `T`)[]
 
 The optional properties to return for the primary entities, defaults to all.
 
@@ -150,6 +150,6 @@ The optional sort order for the joined entities.
 
 ### joinProperties? {#joinproperties}
 
-> `optional` **joinProperties?**: keyof `U`[]
+> `optional` **joinProperties?**: (keyof `U`)[]
 
 The optional properties to return for the joined entities, defaults to all.

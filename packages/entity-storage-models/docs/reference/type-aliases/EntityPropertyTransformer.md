@@ -7,11 +7,11 @@ Used in migration steps for custom property transformations.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
-### U
+### U {#u}
 
 `U` = `unknown`
 

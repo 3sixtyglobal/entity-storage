@@ -44,6 +44,24 @@ The keyspace to use.
 
 ***
 
+### replicationStrategy? {#replicationstrategy}
+
+> `optional` **replicationStrategy?**: [`ScyllaDBReplicationStrategy`](../type-aliases/ScyllaDBReplicationStrategy.md)
+
+The replication strategy used when creating the keyspace.
+
+#### Default
+
+```ts
+NetworkTopologyStrategy
+```
+
+#### Inherited from
+
+[`IScyllaDBTableConfig`](IScyllaDBTableConfig.md).[`replicationStrategy`](IScyllaDBTableConfig.md#replicationstrategy)
+
+***
+
 ### port? {#port}
 
 > `optional` **port?**: `number`

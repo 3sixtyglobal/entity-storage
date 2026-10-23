@@ -26,7 +26,7 @@ SharedStore entry so concurrent callers do not race.
 
 #### Type Parameters
 
-##### TClient
+##### TClient {#tclient}
 
 `TClient`
 
@@ -80,7 +80,7 @@ underlying connection.
 
 #### Type Parameters
 
-##### TClient
+##### TClient {#tclient-1}
 
 `TClient`
 

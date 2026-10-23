@@ -8,7 +8,7 @@ Client for performing entity storage through to REST endpoints.
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T`
 
@@ -294,7 +294,7 @@ The direction for the order, defaults to ascending.
 
 ##### properties?
 
-keyof `T`[]
+(keyof `T`)[]
 
 The optional properties to return, defaults to all.
 

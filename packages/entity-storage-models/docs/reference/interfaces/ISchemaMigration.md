@@ -13,11 +13,11 @@ The key itself encodes the version pair; no version field is needed on the objec
 
 ## Type Parameters
 
-### T
+### T {#t}
 
 `T` = `unknown`
 
-### U
+### U {#u}
 
 `U` = `unknown`
 
