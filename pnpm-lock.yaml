@@ -254,7 +254,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -267,7 +267,7 @@ importers:
         version: 4.10.1(supports-color@5.5.0)
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -330,7 +330,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -349,7 +349,7 @@ importers:
         version: 3.996.9(@aws-sdk/client-dynamodb@3.1153.0)
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -415,7 +415,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -425,7 +425,7 @@ importers:
         version: 0.20.0-next.2
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -491,7 +491,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -507,7 +507,7 @@ importers:
         version: 11.3.1(supports-color@10.2.2)
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -570,7 +570,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -637,7 +637,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -650,7 +650,7 @@ importers:
         version: 7.7.0
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -719,7 +719,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -732,7 +732,7 @@ importers:
         version: 3.24.6(@types/node@26.6.5)
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -798,7 +798,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -811,7 +811,7 @@ importers:
         version: 3.4.9
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -877,7 +877,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -890,7 +890,7 @@ importers:
         version: 4.10.0
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/logging-connector-entity-storage':
         specifier: next
@@ -1003,7 +1003,7 @@ importers:
     dependencies:
       '@3sixty/api-core':
         specifier: next
-        version: 0.20.0-next.0(supports-color@10.2.2)
+        version: 0.20.0-next.1(supports-color@10.2.2)
       '@3sixty/api-models':
         specifier: next
         version: 0.20.0-next.1
@@ -1014,7 +1014,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/nameof':
         specifier: next
@@ -1075,7 +1075,7 @@ importers:
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
@@ -1088,10 +1088,10 @@ importers:
         version: 0.20.0-next.2
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-memory
       '@3sixty/entity-storage-connector-mysql':
-        specifier: 0.20.0-next.0
+        specifier: 0.20.0-next.1
         version: link:../entity-storage-connector-mysql
       '@3sixty/nameof-transformer':
         specifier: next
@@ -1141,12 +1141,8 @@ importers:
 
 packages:
 
-  '@3sixty/api-core@0.20.0-next.0':
-    resolution: {integrity: sha512-tPyKJpr7Odcaa99U1dfCvy0UUiV7sZH7rBsFBJ5obXdlSXd0/aC6Sh2iFJpMShkr0NLTB7v4PhKE75BDvz/Qyw==}
-    engines: {node: '>=24.0.0'}
-
-  '@3sixty/api-models@0.20.0-next.0':
-    resolution: {integrity: sha512-AShxxmk3JR5dvLyC3zXYsBb4FZbtoNYsRlB2TUynLk4epOSZcZN+p8Ya+cMM+vsbLT8joA/Jk8TC9fPSEKSk3g==}
+  '@3sixty/api-core@0.20.0-next.1':
+    resolution: {integrity: sha512-gd6IJEufB6C7Sjv3G+BRPKP7UiZ1NTSUdJqD2nD5JSU9mJ41PwhkZ1PArV5PODUXUI8A/f93g463WxTlYf8Vgw==}
     engines: {node: '>=24.0.0'}
 
   '@3sixty/api-models@0.20.0-next.1':
@@ -4488,8 +4484,8 @@ packages:
     resolution: {integrity: sha512-j7WyPdf0CJoutMzMoPLF/bVXHtKZIT9Rb4eGeEbWw8X2t5oirjPgpL+OpaENZrILYaXqYwnVH+qgUwVbl+pUJQ==}
     engines: {node: '>= 18'}
 
-  socket.io-client@4.8.3:
-    resolution: {integrity: sha512-uP0bpjWrjQmUt5DTHq9RuoCBdFJF10cdX9X+a368j/Ft0wmaVgxlrjvK3kjvgCODOMMOz9lcaRzxmso0bTWZ/g==}
+  socket.io-client@4.8.4:
+    resolution: {integrity: sha512-7wjKAvVXYOJsbmUgkWbnhPD4bFpkqrUR0++XOjpGFmqDqsqV1CI93VTraeExLxpjxEqrWgFoSRZu1ihjLWfkAA==}
     engines: {node: '>=10.0.0'}
 
   socket.io-parser@4.2.7:
@@ -4992,25 +4988,17 @@ packages:
 
 snapshots:
 
-  '@3sixty/api-core@0.20.0-next.0(supports-color@10.2.2)':
+  '@3sixty/api-core@0.20.0-next.1(supports-color@10.2.2)':
     dependencies:
-      '@3sixty/api-models': 0.20.0-next.0
+      '@3sixty/api-models': 0.20.0-next.1
       '@3sixty/core': 0.20.0-next.2
       '@3sixty/nameof': 0.20.0-next.2
       '@3sixty/web': 0.20.0-next.2
-      socket.io-client: 4.8.3(supports-color@10.2.2)
+      socket.io-client: 4.8.4(supports-color@10.2.2)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
-
-  '@3sixty/api-models@0.20.0-next.0':
-    dependencies:
-      '@3sixty/context': 0.20.0-next.2
-      '@3sixty/core': 0.20.0-next.2
-      '@3sixty/entity': 0.20.0-next.2
-      '@3sixty/nameof': 0.20.0-next.2
-      '@3sixty/web': 0.20.0-next.2
 
   '@3sixty/api-models@0.20.0-next.1':
     dependencies:
@@ -8760,7 +8748,7 @@ snapshots:
 
   smol-toml@1.9.1: {}
 
-  socket.io-client@4.8.3(supports-color@10.2.2):
+  socket.io-client@4.8.4(supports-color@10.2.2):
     dependencies:
       '@socket.io/component-emitter': 3.1.2
       debug: 4.4.3(supports-color@10.2.2)
