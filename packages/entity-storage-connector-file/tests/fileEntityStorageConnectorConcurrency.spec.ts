@@ -1,4 +1,5 @@
 // Copyright 2024 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import { readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
@@ -23,11 +24,12 @@ describe("FileEntityStorageConnector - concurrent updates and store integrity", 
 	});
 
 	beforeEach(async () => {
-		await rm(TEST_DIRECTORY, { recursive: true, force: true });
+		// Bun on Windows silently fails a recursive rm of a "./" relative path.
+		await rm(path.resolve(TEST_DIRECTORY), { recursive: true, force: true });
 	});
 
 	afterAll(async () => {
-		await rm(TEST_DIRECTORY, { recursive: true, force: true });
+		await rm(path.resolve(TEST_DIRECTORY), { recursive: true, force: true });
 	});
 
 	test("can set entities concurrently without losing updates or tearing the store", async () => {

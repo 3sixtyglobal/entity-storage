@@ -1,6 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import { rm } from "node:fs/promises";
+import path from "node:path";
 import {
 	ComparisonOperator,
 	EntitySchemaFactory,
@@ -39,7 +41,7 @@ describe("FileEntityStorageConnector - injection-style input handling", () => {
 	});
 
 	afterAll(async () => {
-		await rm(TEST_DIRECTORY, { recursive: true, force: true });
+		await rm(path.resolve(TEST_DIRECTORY), { recursive: true, force: true });
 	});
 
 	test("query() with a SQL-injection-style condition value returns empty results safely", async () => {

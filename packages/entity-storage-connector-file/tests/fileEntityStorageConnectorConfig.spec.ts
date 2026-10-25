@@ -1,6 +1,8 @@
 // Copyright 2024 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import { rm } from "node:fs/promises";
+import path from "node:path";
 import { HealthStatus } from "@3sixty/api-models";
 import { EntitySchemaFactory, EntitySchemaHelper, entity, property } from "@3sixty/entity";
 import { nameof } from "@3sixty/nameof";
@@ -35,7 +37,7 @@ describe("FileEntityStorageConnector - constructor, bootstrap, and health", () =
 	});
 
 	afterAll(async () => {
-		await rm(TEST_DIRECTORY, { recursive: true, force: true });
+		await rm(path.resolve(TEST_DIRECTORY), { recursive: true, force: true });
 	});
 
 	test("can fail to construct when there are no options", () => {
@@ -190,7 +192,7 @@ describe("FileEntityStorageConnector - long identifier bootstrap", () => {
 	});
 
 	afterAll(async () => {
-		await rm("./.tmp/long-identifier-test/", { recursive: true, force: true });
+		await rm(path.resolve("./.tmp/long-identifier-test/"), { recursive: true, force: true });
 	});
 
 	test("can bootstrap with a long identifier name", async () => {
