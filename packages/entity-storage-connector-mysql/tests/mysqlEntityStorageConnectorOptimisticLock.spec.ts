@@ -156,6 +156,21 @@ describe("MySqlEntityStorageConnector Optimistic Locking", () => {
 			});
 		});
 
+		test("throws ConflictError and does not insert when a versioned entity was removed", async () => {
+			const connector = await createVersionedConnector();
+			await connector.set({ id: "1", value: "original" });
+			const snapshot = await connector.get("1");
+			await connector.remove("1");
+
+			await expect(
+				connector.set({ id: "1", value: "resurrected", version: snapshot?.version })
+			).rejects.toMatchObject({
+				name: "ConflictError",
+				message: `${StringHelper.camelCase(connector.className())}.optimisticLockFailed`
+			});
+			expect(await connector.get("1")).toBeUndefined();
+		});
+
 		test("throws ConflictError when two writers race using the same snapshot", async () => {
 			const connector = await createVersionedConnector();
 			await connector.set({ id: "1", value: "original" });

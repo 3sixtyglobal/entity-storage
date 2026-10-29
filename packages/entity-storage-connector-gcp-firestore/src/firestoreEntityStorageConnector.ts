@@ -440,6 +440,14 @@ export class FirestoreEntityStorageConnector<T = unknown>
 					const docSnapshot = await transaction.get(docRef);
 
 					if (!docSnapshot.exists) {
+						if (hasVersionCheck) {
+							conflictError = new ConflictError(
+								FirestoreEntityStorageConnector.CLASS_NAME,
+								"optimisticLockFailed",
+								id
+							);
+							return;
+						}
 						if (Is.stringValue(this._versionKey)) {
 							ObjectHelper.propertySet(prepared, this._versionKey, 1);
 						}

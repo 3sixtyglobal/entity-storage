@@ -661,16 +661,23 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 				values.push(val ?? null);
 			}
 
-			let sql = `INSERT INTO "${this._config.tableName}"`;
-			sql += ` (${keys.map(key => `"${key}"`).join(", ")})`;
-			sql += ` VALUES (${values.map((value, i) => `$${i + 1}`).join(", ")})`;
-			sql += ` ON CONFLICT ("${PostgreSqlEntityStorageConnector._PARTITION_KEY}", "${this._primaryKeyProperty.property as string}")`;
-
+			let sql: string;
 			if (hasVersionCheck) {
-				sql += ` DO UPDATE SET ${keys.map(key => `"${key}" = EXCLUDED."${key}"`).join(", ")}`;
-				sql += ` WHERE "${this._config.tableName}"."${this._versionKey}" = $${values.length + 1}`;
+				// A versioned write only updates the stored version, so an entity removed in the
+				// meantime is not inserted again, matching the other connectors.
+				const partitionIndex = keys.indexOf(PostgreSqlEntityStorageConnector._PARTITION_KEY) + 1;
+				const primaryIndex = keys.indexOf(this._primaryKeyProperty.property as string) + 1;
+				sql = `UPDATE "${this._config.tableName}"`;
+				sql += ` SET ${keys.map((key, i) => `"${key}" = $${i + 1}`).join(", ")}`;
+				sql += ` WHERE "${PostgreSqlEntityStorageConnector._PARTITION_KEY}" = $${partitionIndex}`;
+				sql += ` AND "${this._primaryKeyProperty.property as string}" = $${primaryIndex}`;
+				sql += ` AND "${this._versionKey}" = $${values.length + 1}`;
 				values.push(submittedVersion);
 			} else {
+				sql = `INSERT INTO "${this._config.tableName}"`;
+				sql += ` (${keys.map(key => `"${key}"`).join(", ")})`;
+				sql += ` VALUES (${values.map((value, i) => `$${i + 1}`).join(", ")})`;
+				sql += ` ON CONFLICT ("${PostgreSqlEntityStorageConnector._PARTITION_KEY}", "${this._primaryKeyProperty.property as string}")`;
 				sql += ` DO UPDATE SET ${keys.map(key => `"${key}" = EXCLUDED."${key}"`).join(", ")};`;
 			}
 

@@ -417,6 +417,13 @@ export class FileEntityStorageConnector<T = unknown>
 					}
 					return;
 				}
+				if (hasVersionCheck) {
+					throw new ConflictError(
+						FileEntityStorageConnector.CLASS_NAME,
+						"optimisticLockFailed",
+						entityId
+					);
+				}
 				if (Is.stringValue(this._versionKey)) {
 					ObjectHelper.propertySet(prepared, this._versionKey, 1);
 				}
