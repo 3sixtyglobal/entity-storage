@@ -559,6 +559,12 @@ export class CosmosDbEntityStorageConnector<T = unknown>
 						return;
 					}
 					itemEtag = ObjectHelper.propertyGet(itemData, "_etag");
+				} else if (hasVersionCheck) {
+					throw new ConflictError(
+						CosmosDbEntityStorageConnector.CLASS_NAME,
+						"optimisticLockFailed",
+						id
+					);
 				}
 				if (Is.stringValue(this._versionKey)) {
 					const storedVersion = !Is.empty(itemData)
