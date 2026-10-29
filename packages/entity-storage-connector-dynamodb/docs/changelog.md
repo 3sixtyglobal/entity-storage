@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.20.0-next.3](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-connector-dynamodb-v0.20.0-next.2...entity-storage-connector-dynamodb-v0.20.0-next.3) (2026-10-29)
+
+
+### Bug Fixes
+
+* reject versioned writes to removed entities ([#72](https://github.com/3sixtyglobal/entity-storage/issues/72)) ([02aa1cc](https://github.com/3sixtyglobal/entity-storage/commit/02aa1cc5e6da410aa3e82c59fd261f7a9d98d573))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @3sixty/entity-storage-models bumped from 0.20.0-next.2 to 0.20.0-next.3
+
 ## [0.20.0-next.2](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-connector-dynamodb-v0.20.0-next.1...entity-storage-connector-dynamodb-v0.20.0-next.2) (2026-10-26)
 
 

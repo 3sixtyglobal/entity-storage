@@ -1,6 +1,6 @@
 {
 	"name": "@3sixty/entity-storage-connector-mysql",
-	"version": "0.20.0-next.2",
+	"version": "0.20.0-next.3",
 	"description": "MySQL connector for relational persistence with SQL querying.",
 	"repository": {
 		"type": "git",
@@ -34,7 +34,7 @@
 		"@3sixty/context": "next",
 		"@3sixty/core": "next",
 		"@3sixty/entity": "next",
-		"@3sixty/entity-storage-models": "0.20.0-next.2",
+		"@3sixty/entity-storage-models": "0.20.0-next.3",
 		"@3sixty/logging-models": "next",
 		"@3sixty/nameof": "next",
 		"mysql2": "3.24.6"
