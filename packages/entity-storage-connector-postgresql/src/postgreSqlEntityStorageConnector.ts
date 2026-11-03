@@ -46,7 +46,7 @@ import {
 } from "@3sixty/entity-storage-models";
 import type { ILoggingComponent } from "@3sixty/logging-models";
 import { nameof } from "@3sixty/nameof";
-import postgres, { type ParameterOrJSON } from "postgres";
+import postgres from "postgres";
 import type { IPostgreSqlEntityStorageConnectorConfig } from "./models/IPostgreSqlEntityStorageConnectorConfig.js";
 import type { IPostgreSqlEntityStorageConnectorConstructorOptions } from "./models/IPostgreSqlEntityStorageConnectorConstructorOptions.js";
 
@@ -682,7 +682,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 			}
 
 			const dbConnection = await this.getClient();
-			const result = await dbConnection.unsafe(sql, values as ParameterOrJSON<never>[]);
+			const result = await dbConnection.unsafe(sql, values as postgres.ParameterOrJSON<never>[]);
 
 			if (hasVersionCheck && result.count === 0) {
 				throw new ConflictError(
@@ -767,7 +767,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 				sql += ` ON CONFLICT ("${PostgreSqlEntityStorageConnector._PARTITION_KEY}", "${this._primaryKeyProperty.property as string}")`;
 				sql += ` DO UPDATE SET ${keys.map(key => `"${key}" = EXCLUDED."${key}"`).join(", ")};`;
 
-				await dbConnection.unsafe(sql, allValues as ParameterOrJSON<never>[]);
+				await dbConnection.unsafe(sql, allValues as postgres.ParameterOrJSON<never>[]);
 			}
 		} catch (err) {
 			throw new GeneralError(
@@ -906,7 +906,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 			await dbConnection.unsafe(sql, [
 				partitionKey ?? PostgreSqlEntityStorageConnector._PARTITION_KEY_VALUE,
 				ids
-			] as ParameterOrJSON<never>[]);
+			] as postgres.ParameterOrJSON<never>[]);
 		} catch (err) {
 			throw new GeneralError(
 				PostgreSqlEntityStorageConnector.CLASS_NAME,
@@ -1391,7 +1391,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 			);
 
 			const partitionKey = await this.resolvePartitionKey();
-			const values: ParameterOrJSON<never>[] = [];
+			const values: postgres.ParameterOrJSON<never>[] = [];
 
 			// PostgreSQL numbers its placeholders, so every clause is built in the order it appears
 			// in the statement and its values are appended as it goes.
@@ -1562,9 +1562,9 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 		partitionKey: string | undefined,
 		alias: string,
 		startIndex: number
-	): Promise<{ clauses: string[]; values: ParameterOrJSON<never>[] }> {
+	): Promise<{ clauses: string[]; values: postgres.ParameterOrJSON<never>[] }> {
 		const clauses: string[] = [];
-		const values: ParameterOrJSON<never>[] = [];
+		const values: postgres.ParameterOrJSON<never>[] = [];
 
 		if (joinOptions.joinRequired ?? false) {
 			const exists = await joinConnector.buildJoinExistsClause(
@@ -1618,7 +1618,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 		primaryAlias: string,
 		primaryColumn: string,
 		startIndex: number
-	): Promise<{ clause: string; values: ParameterOrJSON<never>[] }> {
+	): Promise<{ clause: string; values: postgres.ParameterOrJSON<never>[] }> {
 		const partitionKey = await this.resolvePartitionKey();
 		const where = this.buildWhereClause(joinConditions, partitionKey, alias, startIndex);
 
@@ -1649,7 +1649,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 		primaryAlias: string,
 		primaryColumn: string,
 		startIndex: number
-	): Promise<{ clause: string; values: ParameterOrJSON<never>[] }> {
+	): Promise<{ clause: string; values: postgres.ParameterOrJSON<never>[] }> {
 		const partitionKey = await this.resolvePartitionKey();
 		const where = this.buildWhereClause(joinConditions, partitionKey, alias, startIndex);
 
@@ -1748,12 +1748,12 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 		keySetCols: { prop: string; asc: boolean; nullable: boolean }[],
 		lastValues: unknown[] | undefined,
 		startIndex: number
-	): { clauses: string[]; values: ParameterOrJSON<never>[] } {
+	): { clauses: string[]; values: postgres.ParameterOrJSON<never>[] } {
 		if (!Is.arrayValue(lastValues)) {
 			return { clauses: [], values: [] };
 		}
 
-		const values: ParameterOrJSON<never>[] = [];
+		const values: postgres.ParameterOrJSON<never>[] = [];
 		const orParts: string[] = [];
 
 		for (let i = 0; i < keySetCols.length; i++) {
@@ -1764,7 +1764,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 					if (Is.empty(lastValues[j])) {
 						parts.push(`"${keySetCols[j].prop}" IS NULL`);
 					} else {
-						values.push(lastValues[j] as ParameterOrJSON<never>);
+						values.push(lastValues[j] as postgres.ParameterOrJSON<never>);
 						parts.push(`"${keySetCols[j].prop}" = $${startIndex + values.length - 1}`);
 					}
 				}
@@ -1772,7 +1772,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 				if (Is.empty(lastValues[i])) {
 					parts.push(`${col} IS NOT NULL`);
 				} else {
-					values.push(lastValues[i] as ParameterOrJSON<never>);
+					values.push(lastValues[i] as postgres.ParameterOrJSON<never>);
 					const placeholder = `$${startIndex + values.length - 1}`;
 					if (keySetCols[i].asc) {
 						parts.push(
@@ -2127,7 +2127,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 				AND ix.indpred IS NULL
 				AND am.amname = 'btree'
 			ORDER BY i.relname, k.pos`,
-			[this._config.tableName] as ParameterOrJSON<never>[]
+			[this._config.tableName] as postgres.ParameterOrJSON<never>[]
 		);
 
 		const indexes: { [indexName: string]: { columns: string[]; nonUnique: boolean } } = {};
@@ -2162,7 +2162,7 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 			`SELECT column_name AS "columnName"
 			FROM information_schema.columns
 			WHERE table_schema = 'public' AND table_name = $1`,
-			[this._config.tableName] as ParameterOrJSON<never>[]
+			[this._config.tableName] as postgres.ParameterOrJSON<never>[]
 		);
 
 		const columnNames = new Set<string>();
@@ -2317,9 +2317,9 @@ export class PostgreSqlEntityStorageConnector<T = unknown>
 		partitionKey: string | undefined,
 		tableAlias?: string,
 		startIndex: number = 1
-	): { whereClauses: string[]; values: ParameterOrJSON<never>[] } {
+	): { whereClauses: string[]; values: postgres.ParameterOrJSON<never>[] } {
 		const whereClauses: string[] = [];
-		const values: ParameterOrJSON<never>[] = [];
+		const values: postgres.ParameterOrJSON<never>[] = [];
 
 		const finalConditions: EntityCondition<T> = {
 			conditions: [],
