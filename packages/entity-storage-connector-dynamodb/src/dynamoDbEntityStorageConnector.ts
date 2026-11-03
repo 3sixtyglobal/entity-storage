@@ -13,6 +13,7 @@ import {
 	ComponentFactory,
 	ConflictError,
 	Converter,
+	DurationConstants,
 	GeneralError,
 	Guards,
 	Is,
@@ -134,7 +135,7 @@ export class DynamoDbEntityStorageConnector<T = unknown>
 	 * Milliseconds to wait for a global secondary index to finish building.
 	 * @internal
 	 */
-	private static readonly _INDEX_ACTIVE_MAX_WAIT_MS: number = 60000;
+	private static readonly _INDEX_ACTIVE_MAX_WAIT_MS: number = DurationConstants.MsPerMinute;
 
 	/**
 	 * Milliseconds between polls while waiting for a global secondary index to finish building.
@@ -392,7 +393,7 @@ export class DynamoDbEntityStorageConnector<T = unknown>
 				await waitUntilTableExists(
 					{
 						client: dbConnection,
-						maxWaitTime: 60
+						maxWaitTime: DurationConstants.SecondsPerMinute
 					},
 					{
 						TableName: this._config.tableName
@@ -977,7 +978,7 @@ export class DynamoDbEntityStorageConnector<T = unknown>
 			await dbConnection.deleteTable({ TableName: this._config.tableName });
 
 			await waitUntilTableNotExists(
-				{ client: dbConnection, maxWaitTime: 60 },
+				{ client: dbConnection, maxWaitTime: DurationConstants.SecondsPerMinute },
 				{ TableName: this._config.tableName }
 			);
 

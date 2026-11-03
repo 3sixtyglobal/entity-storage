@@ -1,6 +1,7 @@
 // Copyright 2026 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { ContextIdStore } from "@3sixty/context";
+import { DurationConstants } from "@3sixty/core";
 import { EntitySchemaFactory, EntitySchemaHelper, entity, property } from "@3sixty/entity";
 import type { IEntityStorageConnector } from "@3sixty/entity-storage-models";
 import { nameof } from "@3sixty/nameof";
@@ -24,7 +25,7 @@ function createConnector(): IEntityStorageConnector<LargeBatchTestType> {
 		config: {
 			...TEST_COSMOS_CONFIG,
 			containerId: `${TEST_COSMOS_CONFIG.containerId}_largebatch_${Date.now()}`,
-			requestTimeoutMs: 300_000
+			requestTimeoutMs: 5 * DurationConstants.MsPerMinute
 		}
 	});
 }
@@ -71,6 +72,6 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		600_000
+		10 * DurationConstants.MsPerMinute
 	);
 });

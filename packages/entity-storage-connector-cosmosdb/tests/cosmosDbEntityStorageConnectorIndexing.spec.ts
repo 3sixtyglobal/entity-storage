@@ -1,6 +1,7 @@
 // Copyright 2026 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { ContextIdStore } from "@3sixty/context";
+import { DurationConstants } from "@3sixty/core";
 import {
 	ComparisonOperator,
 	EntitySchemaFactory,
@@ -254,7 +255,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		600_000
+		10 * DurationConstants.MsPerMinute
 	);
 
 	// The emulator always reads the indexing policy back with an empty compositeIndexes list, so
@@ -295,7 +296,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
 	// The emulator always reads the indexing policy back with an empty compositeIndexes list, so
@@ -335,28 +336,32 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
-	test("bootstrap is idempotent when called multiple times", async () => {
-		const connector = createIndexedConnector();
+	test(
+		"bootstrap is idempotent when called multiple times",
+		async () => {
+			const connector = createIndexedConnector();
 
-		try {
-			const firstResult = await connector.bootstrap();
-			const secondResult = await connector.bootstrap();
-
-			expect(firstResult).toBe(true);
-			expect(secondResult).toBe(true);
-
-			await connector.set({ id: "1", category: "catA", value: 1 });
-			const storedEntity = await connector.get("1");
-			expect(storedEntity?.category).toBe("catA");
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-		}
-	}, 60_000);
+				const firstResult = await connector.bootstrap();
+				const secondResult = await connector.bootstrap();
+
+				expect(firstResult).toBe(true);
+				expect(secondResult).toBe(true);
+
+				await connector.set({ id: "1", category: "catA", value: 1 });
+				const storedEntity = await connector.get("1");
+				expect(storedEntity?.category).toBe("catA");
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
 		"does not create a duplicate index when the column is already covered by a differently named index",
@@ -376,7 +381,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -397,7 +402,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -418,7 +423,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -439,7 +444,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -460,7 +465,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -481,7 +486,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -502,7 +507,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -523,7 +528,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	// The emulator accepts a composite index but always reads the policy back with an empty
@@ -575,7 +580,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 	// The emulator always reads the indexing policy back with an empty compositeIndexes list, so
 	// the composite indexes are asserted on the definition the connector sends to the container.
@@ -608,7 +613,7 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -648,39 +653,43 @@ describe("CosmosDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
-	test("query filtering on every property of an index group returns only the matching entities", async () => {
-		const containerId = `${TEST_COSMOS_CONFIG.containerId}_group_query_${Date.now()}`;
-		const connector = new CosmosDbEntityStorageConnector<CompositeIndexedTestType>({
-			entitySchema: nameof<CompositeIndexedTestType>(),
-			config: { ...TEST_COSMOS_CONFIG, containerId }
-		});
-
-		try {
-			expect(await connector.bootstrap()).toBe(true);
-
-			await connector.setBatch([
-				{ id: "1", category: "catA", status: "active", value: 1 },
-				{ id: "2", category: "catA", status: "archived", value: 2 },
-				{ id: "3", category: "catB", status: "active", value: 3 },
-				{ id: "4", category: "catA", status: "active", value: 4 }
-			]);
-
-			const result = await connector.query({
-				conditions: [
-					{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
-					{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
-				],
-				logicalOperator: LogicalOperator.And
+	test(
+		"query filtering on every property of an index group returns only the matching entities",
+		async () => {
+			const containerId = `${TEST_COSMOS_CONFIG.containerId}_group_query_${Date.now()}`;
+			const connector = new CosmosDbEntityStorageConnector<CompositeIndexedTestType>({
+				entitySchema: nameof<CompositeIndexedTestType>(),
+				config: { ...TEST_COSMOS_CONFIG, containerId }
 			});
 
-			expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-		}
-	}, 120_000);
+				expect(await connector.bootstrap()).toBe(true);
+
+				await connector.setBatch([
+					{ id: "1", category: "catA", status: "active", value: 1 },
+					{ id: "2", category: "catA", status: "archived", value: 2 },
+					{ id: "3", category: "catB", status: "active", value: 3 },
+					{ id: "4", category: "catA", status: "active", value: 4 }
+				]);
+
+				const result = await connector.query({
+					conditions: [
+						{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
+						{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
+					],
+					logicalOperator: LogicalOperator.And
+				});
+
+				expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+			}
+		},
+		2 * DurationConstants.MsPerMinute
+	);
 });

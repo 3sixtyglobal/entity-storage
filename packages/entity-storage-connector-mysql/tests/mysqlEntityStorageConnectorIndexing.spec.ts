@@ -1,7 +1,7 @@
 // Copyright 2026 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { ContextIdStore } from "@3sixty/context";
-import { Coerce, ComponentFactory } from "@3sixty/core";
+import { Coerce, ComponentFactory, DurationConstants } from "@3sixty/core";
 import {
 	ComparisonOperator,
 	EntitySchemaFactory,
@@ -483,7 +483,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		300_000
+		5 * DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_SECONDARY_INDEX_CREATION)(
@@ -531,7 +531,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_SORT_DIRECTION_INDEX_CREATION)(
@@ -580,49 +580,53 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
-	test("bootstrap is idempotent when called multiple times", async () => {
-		const tableName = `${TEST_MYSQL_CONFIG.tableName}_idempotent_${Date.now()}`;
-		const connector = new MySqlEntityStorageConnector<IndexedTestType>({
-			entitySchema: nameof<IndexedTestType>(),
-			config: { ...TEST_MYSQL_CONFIG, tableName }
-		});
-		let pool: Pool | undefined;
-
-		try {
-			const firstResult = await connector.bootstrap();
-			const secondResult = await connector.bootstrap();
-
-			expect(firstResult).toBe(true);
-			expect(secondResult).toBe(true);
-
-			await connector.set({ id: "1", category: "catA", value: 1 });
-			const storedEntity = await connector.get("1");
-			expect(storedEntity?.category).toBe("catA");
-
-			pool = createPool({
-				host: TEST_MYSQL_CONFIG.host,
-				port: TEST_MYSQL_CONFIG.port,
-				user: TEST_MYSQL_CONFIG.user,
-				password: TEST_MYSQL_CONFIG.password,
-				database: TEST_MYSQL_CONFIG.database
+	test(
+		"bootstrap is idempotent when called multiple times",
+		async () => {
+			const tableName = `${TEST_MYSQL_CONFIG.tableName}_idempotent_${Date.now()}`;
+			const connector = new MySqlEntityStorageConnector<IndexedTestType>({
+				entitySchema: nameof<IndexedTestType>(),
+				config: { ...TEST_MYSQL_CONFIG, tableName }
 			});
-			const indexCount = await countIndexesCoveringColumn(pool, tableName, "category");
-			expect(indexCount).toBe(1);
-		} finally {
+			let pool: Pool | undefined;
+
 			try {
-				await pool?.end();
-			} catch {}
-			try {
-				await connector.teardown?.();
-			} catch {}
-			try {
-				await connector.stop?.();
-			} catch {}
-		}
-	}, 60_000);
+				const firstResult = await connector.bootstrap();
+				const secondResult = await connector.bootstrap();
+
+				expect(firstResult).toBe(true);
+				expect(secondResult).toBe(true);
+
+				await connector.set({ id: "1", category: "catA", value: 1 });
+				const storedEntity = await connector.get("1");
+				expect(storedEntity?.category).toBe("catA");
+
+				pool = createPool({
+					host: TEST_MYSQL_CONFIG.host,
+					port: TEST_MYSQL_CONFIG.port,
+					user: TEST_MYSQL_CONFIG.user,
+					password: TEST_MYSQL_CONFIG.password,
+					database: TEST_MYSQL_CONFIG.database
+				});
+				const indexCount = await countIndexesCoveringColumn(pool, tableName, "category");
+				expect(indexCount).toBe(1);
+			} finally {
+				try {
+					await pool?.end();
+				} catch {}
+				try {
+					await connector.teardown?.();
+				} catch {}
+				try {
+					await connector.stop?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
 		"does not create a duplicate index when the column is already covered by a differently named index",
@@ -666,7 +670,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -711,7 +715,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -759,7 +763,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -810,7 +814,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -860,7 +864,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -914,7 +918,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -963,7 +967,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1012,7 +1016,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1060,7 +1064,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1108,7 +1112,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1156,7 +1160,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1212,7 +1216,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1267,7 +1271,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1322,7 +1326,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1367,7 +1371,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -1412,7 +1416,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_INDEX_UPDATE)(
@@ -1471,7 +1475,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1520,7 +1524,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1564,7 +1568,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1620,7 +1624,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1677,7 +1681,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1734,7 +1738,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1787,7 +1791,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1853,7 +1857,7 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -1949,42 +1953,46 @@ describe("MySqlEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
-	test("query filtering on every property of an index group returns only the matching entities", async () => {
-		const tableName = `${TEST_MYSQL_CONFIG.tableName}_group_query_${Date.now()}`;
-		const connector = new MySqlEntityStorageConnector<CompositeIndexedTestType>({
-			entitySchema: nameof<CompositeIndexedTestType>(),
-			config: { ...TEST_MYSQL_CONFIG, tableName }
-		});
-
-		try {
-			expect(await connector.bootstrap()).toBe(true);
-
-			await connector.setBatch([
-				{ id: "1", category: "catA", status: "active", value: 1 },
-				{ id: "2", category: "catA", status: "archived", value: 2 },
-				{ id: "3", category: "catB", status: "active", value: 3 },
-				{ id: "4", category: "catA", status: "active", value: 4 }
-			]);
-
-			const result = await connector.query({
-				conditions: [
-					{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
-					{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
-				],
-				logicalOperator: LogicalOperator.And
+	test(
+		"query filtering on every property of an index group returns only the matching entities",
+		async () => {
+			const tableName = `${TEST_MYSQL_CONFIG.tableName}_group_query_${Date.now()}`;
+			const connector = new MySqlEntityStorageConnector<CompositeIndexedTestType>({
+				entitySchema: nameof<CompositeIndexedTestType>(),
+				config: { ...TEST_MYSQL_CONFIG, tableName }
 			});
 
-			expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-			try {
-				await connector.stop?.();
-			} catch {}
-		}
-	}, 60_000);
+				expect(await connector.bootstrap()).toBe(true);
+
+				await connector.setBatch([
+					{ id: "1", category: "catA", status: "active", value: 1 },
+					{ id: "2", category: "catA", status: "archived", value: 2 },
+					{ id: "3", category: "catB", status: "active", value: 3 },
+					{ id: "4", category: "catA", status: "active", value: 4 }
+				]);
+
+				const result = await connector.query({
+					conditions: [
+						{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
+						{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
+					],
+					logicalOperator: LogicalOperator.And
+				});
+
+				expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+				try {
+					await connector.stop?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 });

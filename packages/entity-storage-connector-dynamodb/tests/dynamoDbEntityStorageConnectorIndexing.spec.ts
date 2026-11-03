@@ -4,6 +4,7 @@
 // DynamoDB GSIs are required by the connector's query routing; deleting a GSI causes
 // the connector to throw rather than fall back to a scan.
 import { ContextIdStore } from "@3sixty/context";
+import { DurationConstants } from "@3sixty/core";
 import {
 	ComparisonOperator,
 	EntitySchemaFactory,
@@ -288,7 +289,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		300_000
+		5 * DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_SECONDARY_INDEX_CREATION)(
@@ -325,7 +326,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				client.destroy();
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_SORT_DIRECTION_INDEX_CREATION)(
@@ -367,28 +368,32 @@ describe("DynamoDbEntityStorageConnector", () => {
 				client.destroy();
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
-	test("bootstrap is idempotent when called multiple times", async () => {
-		const connector = createIndexedConnector();
+	test(
+		"bootstrap is idempotent when called multiple times",
+		async () => {
+			const connector = createIndexedConnector();
 
-		try {
-			const firstResult = await connector.bootstrap();
-			const secondResult = await connector.bootstrap();
-
-			expect(firstResult).toBe(true);
-			expect(secondResult).toBe(true);
-
-			await connector.set({ id: "1", category: "catA", value: 1 });
-			const storedEntity = await connector.get("1");
-			expect(storedEntity?.category).toBe("catA");
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-		}
-	}, 60_000);
+				const firstResult = await connector.bootstrap();
+				const secondResult = await connector.bootstrap();
+
+				expect(firstResult).toBe(true);
+				expect(secondResult).toBe(true);
+
+				await connector.set({ id: "1", category: "catA", value: 1 });
+				const storedEntity = await connector.get("1");
+				expect(storedEntity?.category).toBe("catA");
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
 		"does not create a duplicate index when the column is already covered by a differently named index",
@@ -408,7 +413,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -429,7 +434,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -450,7 +455,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -471,7 +476,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -492,7 +497,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -513,7 +518,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -534,7 +539,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -555,7 +560,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_INDEX_UPDATE)(
@@ -605,7 +610,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				client.destroy();
 			}
 		},
-		120_000
+		2 * DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -640,7 +645,7 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -670,39 +675,43 @@ describe("DynamoDbEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
-	test("query filtering on every property of an index group returns only the matching entities", async () => {
-		const tableName = `${TEST_DYNAMODB_CONFIG.tableName}_group_query_${Date.now()}`;
-		const connector = createCompositeConnector(tableName);
+	test(
+		"query filtering on every property of an index group returns only the matching entities",
+		async () => {
+			const tableName = `${TEST_DYNAMODB_CONFIG.tableName}_group_query_${Date.now()}`;
+			const connector = createCompositeConnector(tableName);
 
-		try {
-			expect(await connector.bootstrap()).toBe(true);
-
-			await connector.setBatch([
-				{ id: "1", category: "catA", status: "active", value: 1 },
-				{ id: "2", category: "catA", status: "archived", value: 2 },
-				{ id: "3", category: "catB", status: "active", value: 3 },
-				{ id: "4", category: "catA", status: "active", value: 4 }
-			]);
-
-			const result = await connector.query({
-				conditions: [
-					{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
-					{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
-				],
-				logicalOperator: LogicalOperator.And
-			});
-
-			expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-			try {
-				await connector.stop?.();
-			} catch {}
-		}
-	}, 60_000);
+				expect(await connector.bootstrap()).toBe(true);
+
+				await connector.setBatch([
+					{ id: "1", category: "catA", status: "active", value: 1 },
+					{ id: "2", category: "catA", status: "archived", value: 2 },
+					{ id: "3", category: "catB", status: "active", value: 3 },
+					{ id: "4", category: "catA", status: "active", value: 4 }
+				]);
+
+				const result = await connector.query({
+					conditions: [
+						{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
+						{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
+					],
+					logicalOperator: LogicalOperator.And
+				});
+
+				expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+				try {
+					await connector.stop?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 });

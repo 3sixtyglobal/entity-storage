@@ -1,6 +1,7 @@
 // Copyright 2026 IOTA Stiftung.
 // SPDX-License-Identifier: Apache-2.0.
 import { ContextIdStore } from "@3sixty/context";
+import { DurationConstants } from "@3sixty/core";
 import {
 	ComparisonOperator,
 	EntitySchemaFactory,
@@ -223,7 +224,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		300_000
+		5 * DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_SECONDARY_INDEX_CREATION)(
@@ -248,7 +249,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_SORT_DIRECTION_INDEX_CREATION)(
@@ -272,28 +273,32 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
-	test("bootstrap is idempotent when called multiple times", async () => {
-		const connector = createIndexedConnector();
+	test(
+		"bootstrap is idempotent when called multiple times",
+		async () => {
+			const connector = createIndexedConnector();
 
-		try {
-			const firstResult = await connector.bootstrap();
-			const secondResult = await connector.bootstrap();
-
-			expect(firstResult).toBe(true);
-			expect(secondResult).toBe(true);
-
-			await connector.set({ id: "1", category: "catA", value: 1 });
-			const storedEntity = await connector.get("1");
-			expect(storedEntity?.category).toBe("catA");
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-		}
-	}, 60_000);
+				const firstResult = await connector.bootstrap();
+				const secondResult = await connector.bootstrap();
+
+				expect(firstResult).toBe(true);
+				expect(secondResult).toBe(true);
+
+				await connector.set({ id: "1", category: "catA", value: 1 });
+				const storedEntity = await connector.get("1");
+				expect(storedEntity?.category).toBe("catA");
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
 		"does not create a duplicate index when the column is already covered by a differently named index",
@@ -313,7 +318,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -334,7 +339,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -355,7 +360,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -376,7 +381,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -397,7 +402,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -418,7 +423,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -439,7 +444,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_NAMED_INDEX_OBJECTS)(
@@ -460,7 +465,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_INDEX_UPDATE)(
@@ -493,7 +498,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
 		"bootstrap creates a composite index for each multi-property index group",
@@ -518,7 +523,7 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
 	test.skipIf(!SUPPORT_COMPOSITE_INDEXING)(
@@ -544,35 +549,39 @@ describe("MemoryEntityStorageConnector", () => {
 				} catch {}
 			}
 		},
-		60_000
+		DurationConstants.MsPerMinute
 	);
 
-	test("query filtering on every property of an index group returns only the matching entities", async () => {
-		const connector = createCompositeConnector();
+	test(
+		"query filtering on every property of an index group returns only the matching entities",
+		async () => {
+			const connector = createCompositeConnector();
 
-		try {
-			expect(await connector.bootstrap()).toBe(true);
-
-			await connector.setBatch([
-				{ id: "1", category: "catA", status: "active", value: 1 },
-				{ id: "2", category: "catA", status: "archived", value: 2 },
-				{ id: "3", category: "catB", status: "active", value: 3 },
-				{ id: "4", category: "catA", status: "active", value: 4 }
-			]);
-
-			const result = await connector.query({
-				conditions: [
-					{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
-					{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
-				],
-				logicalOperator: LogicalOperator.And
-			});
-
-			expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
-		} finally {
 			try {
-				await connector.teardown?.();
-			} catch {}
-		}
-	}, 60_000);
+				expect(await connector.bootstrap()).toBe(true);
+
+				await connector.setBatch([
+					{ id: "1", category: "catA", status: "active", value: 1 },
+					{ id: "2", category: "catA", status: "archived", value: 2 },
+					{ id: "3", category: "catB", status: "active", value: 3 },
+					{ id: "4", category: "catA", status: "active", value: 4 }
+				]);
+
+				const result = await connector.query({
+					conditions: [
+						{ property: "category", value: "catA", comparison: ComparisonOperator.Equals },
+						{ property: "status", value: "active", comparison: ComparisonOperator.Equals }
+					],
+					logicalOperator: LogicalOperator.And
+				});
+
+				expect(result.entities.map(matched => matched.id).sort()).toEqual(["1", "4"]);
+			} finally {
+				try {
+					await connector.teardown?.();
+				} catch {}
+			}
+		},
+		DurationConstants.MsPerMinute
+	);
 });
