@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0-next.4](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-models-v0.20.0-next.3...entity-storage-models-v0.20.0-next.4) (2026-11-03)
+
+
+### Features
+
+* release to next [skip ci] ([#76](https://github.com/3sixtyglobal/entity-storage/issues/76)) ([8e484ae](https://github.com/3sixtyglobal/entity-storage/commit/8e484aeaaf82bc7d4e9973001d26bd5ba9efebd8))
+
 ## [0.20.0-next.3](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-models-v0.20.0-next.2...entity-storage-models-v0.20.0-next.3) (2026-10-29)
 
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.20.0-next.4](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-connector-gcp-firestore-v0.20.0-next.3...entity-storage-connector-gcp-firestore-v0.20.0-next.4) (2026-11-03)
+
+
+### Features
+
+* release to next [skip ci] ([#76](https://github.com/3sixtyglobal/entity-storage/issues/76)) ([8e484ae](https://github.com/3sixtyglobal/entity-storage/commit/8e484aeaaf82bc7d4e9973001d26bd5ba9efebd8))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @3sixty/entity-storage-models bumped from 0.20.0-next.3 to 0.20.0-next.4
+
 ## [0.20.0-next.3](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-connector-gcp-firestore-v0.20.0-next.2...entity-storage-connector-gcp-firestore-v0.20.0-next.3) (2026-10-29)
 
 
