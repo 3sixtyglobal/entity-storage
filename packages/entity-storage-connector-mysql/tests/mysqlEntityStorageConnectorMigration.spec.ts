@@ -575,7 +575,7 @@ describe("MySqlEntityStorageConnector - partitioning and migration", () => {
 		storageId: string
 	): Promise<{
 		connector: IEntityStorageMigrationConnector;
-		bootstrapped: boolean | undefined;
+		bootstrapped?: boolean;
 		errors: string[];
 		warnings: string[];
 	}> {

@@ -6,6 +6,5 @@ import type { IEntityStorageConnector } from "../models/IEntityStorageConnector.
 /**
  * Factory for creating entity storage connectors.
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const EntityStorageConnectorFactory =
 	Factory.createFactory<IEntityStorageConnector>("entity-storage");

@@ -6,8 +6,8 @@ import { nameof } from "@3sixty/nameof";
 
 /**
  * Minimal context ID handler for test use.
- * Short form: bare id stripped from a "did:example:<id>" value.
- * Long form: "did:internal:<id>" - a different DID method prefix, mirroring how
+ * Short form: bare id stripped from a "did:example:&lt;id&gt;" value.
+ * Long form: "did:internal:&lt;id&gt;" - a different DID method prefix, mirroring how
  * DidContextIdHandler uses "did:internal:" as its canonical long form.
  * guard() rejects any value that is not in long form, which lets migration tests
  * demonstrate the failure that occurs when getPartitionContextIds() returns

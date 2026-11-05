@@ -2646,9 +2646,9 @@ export class DynamoDbEntityStorageConnector<T = unknown>
 	 * @internal
 	 */
 	private buildConditionExpression(conditions?: { property: keyof T; value: unknown }[]): {
-		conditionExpression: string | undefined;
-		attributeNames: { [id: string]: string } | undefined;
-		attributeValues: { [key: string]: NativeAttributeValue } | undefined;
+		conditionExpression?: string;
+		attributeNames?: { [id: string]: string };
+		attributeValues?: { [key: string]: NativeAttributeValue };
 	} {
 		let conditionExpression: string | undefined;
 		let attributeNames: { [id: string]: string } | undefined;

@@ -4,7 +4,6 @@
 /**
  * The replication strategies available when creating a keyspace.
  */
-// eslint-disable-next-line @typescript-eslint/naming-convention
 export const ScyllaDBReplicationStrategy = {
 	/**
 	 * Replicate within the local data center, required by tablet enabled clusters.
