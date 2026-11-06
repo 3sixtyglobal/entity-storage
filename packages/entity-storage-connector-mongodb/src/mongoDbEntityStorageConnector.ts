@@ -1,4 +1,5 @@
 // Copyright 2024 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import {
 	HealthCategory,
@@ -257,7 +258,7 @@ export class MongoDbEntityStorageConnector<T = unknown>
 					const coveringIndex = this.findCoveringIndex(existingIndexes, propName, true);
 					if (Is.empty(coveringIndex)) {
 						try {
-							await collection.createIndex({ [propName]: 1 }, { unique: true });
+							await collection.createIndex({ [propName]: 1 }, { unique: true }, {});
 						} catch (propError) {
 							await nodeLogging?.log({
 								level: "error",
@@ -282,7 +283,7 @@ export class MongoDbEntityStorageConnector<T = unknown>
 					const coveringIndex = this.findCoveringIndex(existingIndexes, propName, false);
 					if (Is.empty(coveringIndex)) {
 						try {
-							await collection.createIndex({ [propName]: 1 });
+							await collection.createIndex({ [propName]: 1 }, {}, {});
 						} catch (propError) {
 							await nodeLogging?.log({
 								level: "error",
@@ -1110,9 +1111,13 @@ export class MongoDbEntityStorageConnector<T = unknown>
 		}
 
 		try {
-			await collection.createIndex(key, {
-				name: IndexHelper.generateCompositeName(this._config.collection, indexProperties)
-			});
+			await collection.createIndex(
+				key,
+				{
+					name: IndexHelper.generateCompositeName(this._config.collection, indexProperties)
+				},
+				{}
+			);
 		} catch (groupError) {
 			await nodeLogging?.log({
 				level: "error",

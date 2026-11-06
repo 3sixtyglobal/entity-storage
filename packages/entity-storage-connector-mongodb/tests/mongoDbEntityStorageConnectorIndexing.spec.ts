@@ -1,4 +1,5 @@
 // Copyright 2026 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import { ContextIdStore } from "@3sixty/context";
 import { DurationConstants } from "@3sixty/core";
@@ -388,7 +389,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
 			// Seed a non-unique index on the primary property; bootstrap would normally create it unique.
-			await col.createIndex({ id: 1 });
+			await col.createIndex({ id: 1 }, {}, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -424,7 +425,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
 			// Seed a sparse index on the secondary property; bootstrap would normally create a plain one.
-			await col.createIndex({ category: 1 }, { sparse: true });
+			await col.createIndex({ category: 1 }, { sparse: true }, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -459,7 +460,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ category: -1 });
+			await col.createIndex({ category: -1 }, {}, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -493,7 +494,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ category: 1, value: 1 });
+			await col.createIndex({ category: 1, value: 1 }, {}, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -526,7 +527,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ id: -1 }, { unique: true });
+			await col.createIndex({ id: -1 }, { unique: true }, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -560,7 +561,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ id: -1 });
+			await col.createIndex({ id: -1 }, {}, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -594,7 +595,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ value: 1, category: 1 });
+			await col.createIndex({ value: 1, category: 1 }, {}, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -627,7 +628,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ category: -1 }, { hidden: true });
+			await col.createIndex({ category: -1 }, { hidden: true }, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -660,7 +661,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ category: -1 }, { sparse: true });
+			await col.createIndex({ category: -1 }, { sparse: true }, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -693,7 +694,11 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ category: -1 }, { partialFilterExpression: { value: { $gt: 0 } } });
+			await col.createIndex(
+				{ category: -1 },
+				{ partialFilterExpression: { value: { $gt: 0 } } },
+				{}
+			);
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);
@@ -726,7 +731,7 @@ describe("MongoDbEntityStorageConnector", () => {
 			await client.connect();
 			const col = client.db(TEST_MONGODB_CONFIG.database).collection(collectionName);
 
-			await col.createIndex({ id: 1, value: 1 });
+			await col.createIndex({ id: 1, value: 1 }, {}, {});
 
 			const result = await connector.bootstrap();
 			expect(result).toBe(true);

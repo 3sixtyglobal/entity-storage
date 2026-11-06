@@ -1,4 +1,5 @@
 // Copyright 2026 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import { ContextIdKeys, ContextIdStore } from "@3sixty/context";
 import {
@@ -23,7 +24,7 @@ import type { SchemaVersion } from "../src/entities/schemaVersion.js";
 import { initSchema } from "../src/schema.js";
 import { SchemaVersionService } from "../src/schemaVersionService.js";
 
-interface Widget {
+interface IWidget {
 	id: string;
 	type: string;
 	value?: string;
@@ -70,10 +71,10 @@ const WIDGET_V1 = `${WIDGET}V1`;
 const WIDGET_STORAGE_TYPE = "widget";
 const VERSION_STORAGE_TYPE = "schema-version";
 const CONNECTOR_VERSION_KEY = "connectorVersion";
-const SEED_ROW: Widget = { id: "1", type: "alias", value: "Acme" };
+const SEED_ROW: IWidget = { id: "1", type: "alias", value: "Acme" };
 const HASH = "h".repeat(27);
 
-const ID_PROPERTY: IEntitySchemaProperty<Widget> = {
+const ID_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	property: "id",
 	type: EntitySchemaPropertyType.String,
 	isPrimary: true,
@@ -81,29 +82,29 @@ const ID_PROPERTY: IEntitySchemaProperty<Widget> = {
 };
 
 // An index group needs at least two members, so a shape without value or valueHash uses this.
-const UNINDEXED_TYPE_PROPERTY: IEntitySchemaProperty<Widget> = {
+const UNINDEXED_TYPE_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	property: "type",
 	type: EntitySchemaPropertyType.String,
 	maxLength: 32
 };
 
-const TYPE_PROPERTY: IEntitySchemaProperty<Widget> = {
+const TYPE_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	...UNINDEXED_TYPE_PROPERTY,
 	indexGroup: [{ name: "typeValue", direction: SortDirection.Ascending, index: 0 }]
 };
 
-const VALUE_PROPERTY: IEntitySchemaProperty<Widget> = {
+const VALUE_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	property: "value",
 	type: EntitySchemaPropertyType.String,
 	maxLength: 255
 };
 
-const INDEXED_VALUE_PROPERTY: IEntitySchemaProperty<Widget> = {
+const INDEXED_VALUE_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	...VALUE_PROPERTY,
 	indexGroup: [{ name: "typeValue", direction: SortDirection.Ascending, index: 1 }]
 };
 
-const VALUE_HASH_PROPERTY: IEntitySchemaProperty<Widget> = {
+const VALUE_HASH_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	property: "valueHash",
 	type: EntitySchemaPropertyType.String,
 	maxLength: 27,
@@ -111,7 +112,7 @@ const VALUE_HASH_PROPERTY: IEntitySchemaProperty<Widget> = {
 	indexGroup: [{ name: "typeValue", direction: SortDirection.Ascending, index: 1 }]
 };
 
-const LABEL_PROPERTY: IEntitySchemaProperty<Widget> = {
+const LABEL_PROPERTY: IEntitySchemaProperty<IWidget> = {
 	property: "label",
 	type: EntitySchemaPropertyType.String,
 	maxLength: 255,
@@ -133,9 +134,9 @@ const HASHED_SHAPE = [ID_PROPERTY, TYPE_PROPERTY, VALUE_PROPERTY, VALUE_HASH_PRO
 function registerWidgetSchema(
 	name: string,
 	version: number,
-	properties: IEntitySchemaProperty<Widget>[]
+	properties: IEntitySchemaProperty<IWidget>[]
 ): void {
-	const schema: IEntitySchema<Widget> = { type: name, version, properties };
+	const schema: IEntitySchema<IWidget> = { type: name, version, properties };
 	EntitySchemaFactory.register(name, () => schema as IEntitySchema);
 }
 
@@ -144,7 +145,7 @@ function registerWidgetSchema(
  * @param fromVersion The version the step migrates from.
  * @param migration The override.
  */
-function registerWidgetMigration(fromVersion: number, migration: ISchemaMigration<Widget>): void {
+function registerWidgetMigration(fromVersion: number, migration: ISchemaMigration<IWidget>): void {
 	SchemaMigrationFactory.register(
 		`${WIDGET}_${fromVersion}_${fromVersion + 1}`,
 		() => migration as ISchemaMigration
@@ -188,9 +189,9 @@ describe.each(CONNECTOR_TYPES)("SchemaVersionService with the $name connector", 
 	 */
 	async function seedWidgetStorage(
 		storageId: string,
-		rows: Widget[] = [SEED_ROW]
-	): Promise<IEntityStorageMigrationConnector<Widget>> {
-		const seeder = await createStorage<Widget>(WIDGET_V0, storageId);
+		rows: IWidget[] = [SEED_ROW]
+	): Promise<IEntityStorageMigrationConnector<IWidget>> {
+		const seeder = await createStorage<IWidget>(WIDGET_V0, storageId);
 		for (const row of rows) {
 			await seeder.set(row);
 		}
@@ -244,8 +245,8 @@ describe.each(CONNECTOR_TYPES)("SchemaVersionService with the $name connector", 
 	async function registerWidgetStorage(
 		storageId: string,
 		partitionContextIds?: string[]
-	): Promise<IEntityStorageMigrationConnector<Widget>> {
-		const connector = await createStorage<Widget>(WIDGET, storageId, partitionContextIds);
+	): Promise<IEntityStorageMigrationConnector<IWidget>> {
+		const connector = await createStorage<IWidget>(WIDGET, storageId, partitionContextIds);
 		EntityStorageConnectorFactory.register(WIDGET_STORAGE_TYPE, () => connector);
 		return connector;
 	}
@@ -254,16 +255,16 @@ describe.each(CONNECTOR_TYPES)("SchemaVersionService with the $name connector", 
 	 * Get the Widget connector the service left registered, which a migration replaces.
 	 * @returns The connector.
 	 */
-	function registeredWidgetStorage(): IEntityStorageConnector<Widget> {
-		return EntityStorageConnectorFactory.get<IEntityStorageConnector<Widget>>(WIDGET_STORAGE_TYPE);
+	function registeredWidgetStorage(): IEntityStorageConnector<IWidget> {
+		return EntityStorageConnectorFactory.get<IEntityStorageConnector<IWidget>>(WIDGET_STORAGE_TYPE);
 	}
 
 	/**
 	 * Check a new row carrying valueHash can be written and read back.
 	 * @param connector The connector to write through.
 	 */
-	async function expectHashWritable(connector: IEntityStorageConnector<Widget>): Promise<void> {
-		const row: Widget = { id: "2", type: "alias", value: "Other", valueHash: HASH };
+	async function expectHashWritable(connector: IEntityStorageConnector<IWidget>): Promise<void> {
+		const row: IWidget = { id: "2", type: "alias", value: "Other", valueHash: HASH };
 		await connector.set(row);
 		expect(await connector.get("2")).toEqual(row);
 	}
@@ -405,7 +406,13 @@ describe.each(CONNECTOR_TYPES)("SchemaVersionService with the $name connector", 
 		expect((await readVersions(versionStore))[WIDGET]).toEqual(2);
 		const migrated = registeredWidgetStorage();
 		expect(await migrated.get("1")).toEqual(SEED_ROW);
-		const row: Widget = { id: "2", type: "alias", value: "Other", valueHash: HASH, label: "Label" };
+		const row: IWidget = {
+			id: "2",
+			type: "alias",
+			value: "Other",
+			valueHash: HASH,
+			label: "Label"
+		};
 		await migrated.set(row);
 		expect(await migrated.get("2")).toEqual(row);
 	});
@@ -457,7 +464,7 @@ describe.each(CONNECTOR_TYPES)("SchemaVersionService with the $name connector", 
 		expect(await registeredWidgetStorage().get("1")).toEqual({ id: "1", type: "alias" });
 
 		// A connector for the original shape finds the rebuilt storage no longer has the column.
-		const probe = await createStorage<Widget>(WIDGET_V0, storageId);
+		const probe = await createStorage<IWidget>(WIDGET_V0, storageId);
 		expect(probe.getMissingColumns?.() ?? []).toEqual(
 			connectorType.reportsMissingColumns ? ["value"] : []
 		);
@@ -562,7 +569,7 @@ describe.each(CONNECTOR_TYPES)("SchemaVersionService with the $name connector", 
 		];
 		registerWidgetSchema(WIDGET_V0, 0, UNHASHED_SHAPE);
 		registerWidgetSchema(WIDGET, 1, HASHED_SHAPE);
-		const seeder = await createStorage<Widget>(WIDGET_V0, storageId, partitionContextIds);
+		const seeder = await createStorage<IWidget>(WIDGET_V0, storageId, partitionContextIds);
 		for (const partition of partitions) {
 			await ContextIdStore.run(partition, async () =>
 				seeder.set({ ...SEED_ROW, value: partition[ContextIdKeys.Tenant] })

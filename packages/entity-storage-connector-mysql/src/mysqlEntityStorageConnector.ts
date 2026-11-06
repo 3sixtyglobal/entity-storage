@@ -1,4 +1,5 @@
 // Copyright 2024 IOTA Stiftung.
+// Copyright 2026 3Sixty Trade Ltd.
 // SPDX-License-Identifier: Apache-2.0.
 import {
 	HealthCategory,
@@ -2109,7 +2110,7 @@ export class MySqlEntityStorageConnector<T = unknown>
 			await this.addIndex(pool, indexName, indexCols, !Is.empty(indexes[indexName]));
 		}
 
-		// TODO: remove the legacy index handling once every installation has bootstrapped on a release that contains it
+		// The legacy index handling can be removed once every installation has bootstrapped on a release that contains it
 		const legacyName = IndexHelper.generateLegacyName(this._config.tableName, columnName);
 		const legacyIndex = indexes[legacyName];
 
