@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.20.0-next.5](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-connector-scylladb-v0.20.0-next.4...entity-storage-connector-scylladb-v0.20.0-next.5) (2026-11-06)
+
+
+### Bug Fixes
+
+* apply the shared lint rules for interface names, model locations and deprecated apis ([2292602](https://github.com/3sixtyglobal/entity-storage/commit/22926025ca2df07f884f2eaa218027e1e0409957))
+
+
+### Dependencies
+
+* The following workspace dependencies were updated
+  * dependencies
+    * @3sixty/entity-storage-models bumped from 0.20.0-next.4 to 0.20.0-next.5
+
 ## [0.20.0-next.4](https://github.com/3sixtyglobal/entity-storage/compare/entity-storage-connector-scylladb-v0.20.0-next.3...entity-storage-connector-scylladb-v0.20.0-next.4) (2026-11-03)
 
 
