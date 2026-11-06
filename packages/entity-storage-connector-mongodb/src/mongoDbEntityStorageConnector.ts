@@ -789,7 +789,7 @@ export class MongoDbEntityStorageConnector<T = unknown>
 		const filter = this.buildFilter(conditions);
 
 		const sort = new Map<string, SortDirection>();
-		if (Array.isArray(sortProperties)) {
+		if (Is.array(sortProperties)) {
 			for (const sortProperty of sortProperties) {
 				sort.set(sortProperty.property as string, sortProperty.sortDirection);
 			}
@@ -1379,7 +1379,7 @@ export class MongoDbEntityStorageConnector<T = unknown>
 			case ComparisonOperator.LessThanOrEqual:
 				return { $lte: value };
 			case ComparisonOperator.In:
-				return { $in: Array.isArray(value) ? value : [value] };
+				return { $in: Is.array(value) ? value : [value] };
 			case ComparisonOperator.StartsWith:
 				return { $regex: `^${this.escapeRegex(String(value))}` };
 			case ComparisonOperator.Includes:
