@@ -243,38 +243,38 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@azure/cosmos':
         specifier: 4.10.1
         version: 4.10.1(supports-color@5.5.0)
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -310,25 +310,25 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@aws-sdk/client-dynamodb':
         specifier: 3.1161.0
         version: 3.1161.0
@@ -341,13 +341,13 @@ importers:
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -383,35 +383,35 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -444,25 +444,25 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@google-cloud/firestore':
         specifier: 9.4.0
         version: 9.4.0(supports-color@10.2.2)
@@ -472,13 +472,13 @@ importers:
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@vitest/coverage-v8':
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
@@ -511,35 +511,35 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -572,38 +572,38 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       mongodb:
         specifier: 7.8.0
         version: 7.8.0
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -639,38 +639,38 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       mysql2:
         specifier: 3.24.6
         version: 3.24.6(@types/node@26.6.6)
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -706,38 +706,38 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       postgres:
         specifier: 4.0.0
         version: 4.0.0
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -773,38 +773,38 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       cassandra-driver:
         specifier: 4.10.0
         version: 4.10.0
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -840,32 +840,32 @@ importers:
     dependencies:
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/crypto':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@vitest/coverage-v8':
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
@@ -895,35 +895,35 @@ importers:
     dependencies:
       '@3sixty/api-core':
         specifier: next
-        version: 0.20.0-next.9(supports-color@10.2.2)
+        version: 0.20.0-next.10(supports-color@10.2.2)
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/web':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
     devDependencies:
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@vitest/coverage-v8':
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
@@ -953,47 +953,47 @@ importers:
     dependencies:
       '@3sixty/api-models':
         specifier: next
-        version: 0.20.0-next.9
+        version: 0.20.0-next.10
       '@3sixty/context':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/core':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/entity-storage-models':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-models
       '@3sixty/logging-models':
         specifier: next
         version: 0.20.0-next.2
       '@3sixty/nameof':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/web':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
     devDependencies:
       '@3sixty/entity-storage-connector-memory':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-connector-memory
       '@3sixty/entity-storage-connector-mysql':
-        specifier: 0.20.0-next.4
+        specifier: 0.20.0-next.5
         version: link:../entity-storage-connector-mysql
       '@3sixty/nameof-transformer':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@3sixty/nameof-vitest-plugin':
         specifier: next
-        version: 0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
+        version: 0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
       '@3sixty/ts-to-openapi':
         specifier: next
         version: 0.20.0-next.6
       '@3sixty/validate-locales':
         specifier: next
-        version: 0.20.0-next.11
+        version: 0.20.0-next.12
       '@types/node':
         specifier: 26.6.6
         version: 26.6.6
@@ -1027,49 +1027,49 @@ importers:
 
 packages:
 
-  '@3sixty/api-core@0.20.0-next.9':
-    resolution: {integrity: sha512-vZuxgkSkJyW3k+2iszIghQ1R9pjigdZFNGBYApCVmLaKuld6kjZjiGFGrXjSRdhtgpeCnU9sXVvuI1I6ui44SQ==}
+  '@3sixty/api-core@0.20.0-next.10':
+    resolution: {integrity: sha512-ZNp1r99IAyX4+eSbqyoGodMTJ6j3F15/vdrsidw3j3efMCssbyw90ZAFCDDF80CawgrHdBchQVvq3TYseDXItg==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/api-models@0.20.0-next.9':
-    resolution: {integrity: sha512-XosWbERqQEphfNu5JjU7Vo5Nst0JANoLfSFNKcPrLILwemzFCgLhq72JzSXVwgPZyuQcP+W8XK8QTnqdzvcarg==}
+  '@3sixty/api-models@0.20.0-next.10':
+    resolution: {integrity: sha512-39vFFlLVCOS/co9yC5kvNTU8C/M06rMA2OY7LnqcjQSJ82wivichIOgNG6v3LKJHyxN3ofAlKQUW0RAY/0GE+g==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/cli-core@0.20.0-next.11':
-    resolution: {integrity: sha512-H6/R1sIahm9qSsMxBapkqcNY7tyZ8okWJ9vDyeJpJDQhr/gJ/I9UIhbH8Q4ClTg9oJ6LPCjfnOiAZH9kRv+O5Q==}
+  '@3sixty/cli-core@0.20.0-next.12':
+    resolution: {integrity: sha512-J/8fZVD7zVQiNhQgwt6iHhXtwB2I6Z0oZMWovlQ2KszL18Ypz1BP4w4rzLVz+9CVRuffSmwLIE/BfOm9FQ/qDg==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/context@0.20.0-next.11':
-    resolution: {integrity: sha512-LItdeIYtcg20lm1RFZuR7M5lHnz0dEKbvzltOT7RS/rqeEJ3cwB2QXPKRtAfEo4FjPvcRqiLtSIBCm9G4gtJ+g==}
+  '@3sixty/context@0.20.0-next.12':
+    resolution: {integrity: sha512-C+0QJskhcNGnpxtrcWNTPq5aatPVjG84cpRxoTyACfFoXiUJDvpTnbxt7N/1BFA0mt17s9m/lhc2/y9Xt/hJbQ==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/core@0.20.0-next.11':
-    resolution: {integrity: sha512-SM6Nj/TT5eHy2iOXD4dO6XW9i+uilBik6rPsI2EfQ3QemHny1UV1Z7ZH/gYQFplYTkMs/cI7jGmIF5A7fcFRTg==}
+  '@3sixty/core@0.20.0-next.12':
+    resolution: {integrity: sha512-kVoIKVlMfgK3qbfpYBw6nBb1WfuzWoKHL41xvDkC774qcDoC8E/gggpfiAevWm7mLbI1Bq9kDfY5c4e5yL/SKw==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/crypto@0.20.0-next.11':
-    resolution: {integrity: sha512-1q0p7OEl0reU2tX5iA9D1/bn+PCsJgI6ITzMS2c8zHV5EIM4tthl/EhwpYpkQrKeZcfoXw5a7Bv1r6BOoXxEhg==}
+  '@3sixty/crypto@0.20.0-next.12':
+    resolution: {integrity: sha512-WRJpejwBzZ14FwVppnx3d4RtZYbwwJp0KnCsFqPWVA90trCRQiRCfbGyNWk1rMbBlK9dQ+LaOJu7b/v5NlKHPw==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/entity@0.20.0-next.11':
-    resolution: {integrity: sha512-Z3twHt9NZ/U5h4rQB5IkrTEQgk+DkcwgcHuEbHmkQMJ4sWoOgftT9T73eqsY/UcrW5zjSyW46V5a4pYif0Uoyw==}
+  '@3sixty/entity@0.20.0-next.12':
+    resolution: {integrity: sha512-/2R5RqMxgCrYSEaaOlmtwuRR7Pp9tldkCJf+5bh6XJay8QbrpDGZm3RI8Baz4aCEZGrq83NIzv9U1dKhpgnRhw==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
   '@3sixty/logging-models@0.20.0-next.2':
     resolution: {integrity: sha512-MLUhNB6oojDYu/38fDs6M+XKkpdkeLblglylOfuvd30DSz1nJ8UBQ/HY/Eu4dNClXqHlYSLu8siyzwpgpL+6UA==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/nameof-transformer@0.20.0-next.11':
-    resolution: {integrity: sha512-fSxSCWCQjLaqtb2//I9sUdFiKryhYKD5a/qrFFtqwe1++VrSxO+Vtqf9FNVPzMv5uxTUQs4pi0vumga+ZDv/8A==}
+  '@3sixty/nameof-transformer@0.20.0-next.12':
+    resolution: {integrity: sha512-N8m5zfwgpkIXZWWvNm8TABNynjbNcX2cuhO6MqpZImw58YUUyhh5rgNidWgbz9PHDm5m8Llcp07iUCVwJxk8qw==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
     hasBin: true
 
-  '@3sixty/nameof-vitest-plugin@0.20.0-next.11':
-    resolution: {integrity: sha512-KdSxLJu4Bc31V9DvKYMjj0ITdYGbPbuwvaBF7e9vFeewGEHBMmvq8yz2BAYVTaoLgdjeA4OSHmf0eCra58tNjA==}
+  '@3sixty/nameof-vitest-plugin@0.20.0-next.12':
+    resolution: {integrity: sha512-yRbS9979i28zMzPUjR/gqXYg2BfLQKUQC534g7dk81qyyiA3TzF48v9Z/mFwRz4FAOusOsgHSlkac7NVOY5phg==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
-  '@3sixty/nameof@0.20.0-next.11':
-    resolution: {integrity: sha512-s/nCvXZV6l7K7vkBCtB923VAfBUCXTJD2MW6OesFn7/f5Zcg6Fmp/oAgq8uk9Prop5MfoRzQDbBLSKLjp6G1gA==}
+  '@3sixty/nameof@0.20.0-next.12':
+    resolution: {integrity: sha512-nX3/P9AlPycG4JZje/HYaT/KWkSxIB/bY20W3+RoNMlmzw67bYdn57FFL83lX43idwPjH4JdfG8jlOuoC4t+3A==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
   '@3sixty/tools-core@0.20.0-next.6':
@@ -1085,13 +1085,13 @@ packages:
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
     hasBin: true
 
-  '@3sixty/validate-locales@0.20.0-next.11':
-    resolution: {integrity: sha512-F+XC4hDloQwcjlRy4cV344IJPzc/a7H5GC/Co/yTDd7fOG1OuYq0F5x4eyBbZRA3QEb3cNFpao4ZVkYSIdwiWA==}
+  '@3sixty/validate-locales@0.20.0-next.12':
+    resolution: {integrity: sha512-StAs69pwc+Fv2naMc4Fr2NwElUmLo/7dQBhtdZKDgfYqC96RaUt9yvFNJde5ApX24FS6LJl7V1pQlcn4D8rVrQ==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
     hasBin: true
 
-  '@3sixty/web@0.20.0-next.11':
-    resolution: {integrity: sha512-m0lOYnvOSNsBvPk5hWJ93gR7kJjztsNlg5WIfGGdOX/TtR0p+juG2fj2p55ppBL2ZC1N85s3YAty2rMsYeh1cg==}
+  '@3sixty/web@0.20.0-next.12':
+    resolution: {integrity: sha512-B3ETILZZCrFpXEk06mH0JQ+PaLTzFhsVq/sVflqffY4Bb1HB9hn0lB6z3j2EQ/QQYsB1Jf8XEIu6uVCqQbbCYw==}
     engines: {bun: '>=1.4.4', node: '>=24.0.0'}
 
   '@aws-sdk/client-dynamodb@3.1161.0':
@@ -4831,48 +4831,48 @@ packages:
 
 snapshots:
 
-  '@3sixty/api-core@0.20.0-next.9(supports-color@10.2.2)':
+  '@3sixty/api-core@0.20.0-next.10(supports-color@10.2.2)':
     dependencies:
-      '@3sixty/api-models': 0.20.0-next.9
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
-      '@3sixty/web': 0.20.0-next.11
+      '@3sixty/api-models': 0.20.0-next.10
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
+      '@3sixty/web': 0.20.0-next.12
       socket.io-client: 4.8.4(supports-color@10.2.2)
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
 
-  '@3sixty/api-models@0.20.0-next.9':
+  '@3sixty/api-models@0.20.0-next.10':
     dependencies:
-      '@3sixty/context': 0.20.0-next.11
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/entity': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
-      '@3sixty/web': 0.20.0-next.11
+      '@3sixty/context': 0.20.0-next.12
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/entity': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
+      '@3sixty/web': 0.20.0-next.12
 
-  '@3sixty/cli-core@0.20.0-next.11':
+  '@3sixty/cli-core@0.20.0-next.12':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
       chalk: 6.0.1
       commander: 15.0.0
       dotenv: 18.0.9
 
-  '@3sixty/context@0.20.0-next.11':
+  '@3sixty/context@0.20.0-next.12':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
 
-  '@3sixty/core@0.20.0-next.11':
+  '@3sixty/core@0.20.0-next.12':
     dependencies:
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/nameof': 0.20.0-next.12
       intl-messageformat: 12.1.4
       rfc6902: 5.4.0
 
-  '@3sixty/crypto@0.20.0-next.11':
+  '@3sixty/crypto@0.20.0-next.12':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
       '@noble/ciphers': 2.4.0
       '@noble/curves': 2.4.0
       '@noble/hashes': 2.4.0
@@ -4881,27 +4881,27 @@ snapshots:
       '@scure/bip39': 2.4.0
       micro-key-producer: 0.10.2
 
-  '@3sixty/entity@0.20.0-next.11':
+  '@3sixty/entity@0.20.0-next.12':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
       reflect-metadata: 0.2.2
       tslib: 2.9.1
 
   '@3sixty/logging-models@0.20.0-next.2':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/entity': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/entity': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
 
-  '@3sixty/nameof-transformer@0.20.0-next.11':
+  '@3sixty/nameof-transformer@0.20.0-next.12':
     dependencies:
       typescript: 6.0.3
       typescript-native: typescript@7.1.0-beta
 
-  '@3sixty/nameof-vitest-plugin@0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))':
+  '@3sixty/nameof-vitest-plugin@0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))':
     dependencies:
-      '@3sixty/nameof-transformer': 0.20.0-next.11
+      '@3sixty/nameof-transformer': 0.20.0-next.12
       vitest: 5.0.5(@opentelemetry/api@1.9.1)(@types/node@26.6.2)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.2)(jiti@2.7.0))
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -4918,9 +4918,9 @@ snapshots:
       - msw
       - vite
 
-  '@3sixty/nameof-vitest-plugin@0.20.0-next.11(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))':
+  '@3sixty/nameof-vitest-plugin@0.20.0-next.12(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))':
     dependencies:
-      '@3sixty/nameof-transformer': 0.20.0-next.11
+      '@3sixty/nameof-transformer': 0.20.0-next.12
       vitest: 5.0.5(@opentelemetry/api@1.9.1)(@types/node@26.6.6)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@26.6.6)(jiti@2.7.0))
     transitivePeerDependencies:
       - '@edge-runtime/vm'
@@ -4937,13 +4937,13 @@ snapshots:
       - msw
       - vite
 
-  '@3sixty/nameof@0.20.0-next.11': {}
+  '@3sixty/nameof@0.20.0-next.12': {}
 
   '@3sixty/tools-core@0.20.0-next.6':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/crypto': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/crypto': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
       '@3sixty/tools-models': 0.20.0-next.6
       glob: 13.0.6
       typescript: 6.0.3
@@ -4952,29 +4952,29 @@ snapshots:
 
   '@3sixty/ts-to-openapi@0.20.0-next.6':
     dependencies:
-      '@3sixty/cli-core': 0.20.0-next.11
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/cli-core': 0.20.0-next.12
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
       '@3sixty/tools-core': 0.20.0-next.6
       '@3sixty/tools-models': 0.20.0-next.6
-      '@3sixty/web': 0.20.0-next.11
+      '@3sixty/web': 0.20.0-next.12
       commander: 15.0.0
 
-  '@3sixty/validate-locales@0.20.0-next.11':
+  '@3sixty/validate-locales@0.20.0-next.12':
     dependencies:
-      '@3sixty/cli-core': 0.20.0-next.11
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
-      '@3sixty/nameof-transformer': 0.20.0-next.11
+      '@3sixty/cli-core': 0.20.0-next.12
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
+      '@3sixty/nameof-transformer': 0.20.0-next.12
       commander: 15.0.0
       glob: 14.0.3
       typescript: 6.0.3
 
-  '@3sixty/web@0.20.0-next.11':
+  '@3sixty/web@0.20.0-next.12':
     dependencies:
-      '@3sixty/core': 0.20.0-next.11
-      '@3sixty/crypto': 0.20.0-next.11
-      '@3sixty/nameof': 0.20.0-next.11
+      '@3sixty/core': 0.20.0-next.12
+      '@3sixty/crypto': 0.20.0-next.12
+      '@3sixty/nameof': 0.20.0-next.12
       jose: 6.2.15
 
   '@aws-sdk/client-dynamodb@3.1161.0':
